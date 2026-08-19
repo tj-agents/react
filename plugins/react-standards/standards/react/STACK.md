@@ -11,12 +11,12 @@ Each row below has a skill that covers *how* to use it well; this skill only dec
 | Server state — anything fetched from an API | **React Query** | `server-state` |
 | Shared client state | **Zustand** | `client-state` |
 | Parsing and validating untrusted input | **zod** | `write-boundary` |
-| Routing | **TanStack Router** | — |
-| Styling | **Tailwind**, `cn()`, **cva** for variants | — |
-| Dates and times | **dayjs**, behind one formatting module | — |
+| Routing | **TanStack Router** | `routing` |
+| Styling | **Tailwind**, `cn()`, **cva** for variants | `ui-components` |
+| Dates and times | **dayjs**, behind one formatting module | `date-formatting` |
 | HTTP | **axios**, one instance per backend service | `http-layer` |
-| Tests | **Vitest** | — |
-| Tables | **TanStack Table** | — |
+| Tests | **Vitest** | `frontend-testing` |
+| Tables | **TanStack Table** | `data-tables` |
 
 ## Zustand over a reducer, in most cases
 

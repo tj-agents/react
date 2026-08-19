@@ -67,12 +67,9 @@ machine the trees are additionally junctioned into `~/.agents/` by `dotagents`'
 These slots are deliberately empty rather than silently missing. Adding one is a new doc in the tree plus
 its router; nothing else moves.
 
-`ROUTING.md` (typed routes, search-param validation, guards, loader vs query) · `UI.md` (Tailwind with
-`cn`/`cva`, Radix/shadcn ownership, sonner, framer-motion) · `TABLES.md` (TanStack Table) · `DATES.md`
-(dayjs behind one formatting module) · `TESTING.md` (Vitest — what to test at which level) ·
 `component-design` (props typing, composition over configuration, when to split) · `loading-and-errors`
 (skeleton vs spinner, suspense and error boundaries, where pending renders) · `accessibility` ·
-`formatting` (dates, money, numbers behind one module) · `realtime` (connection lifecycle, subscription in
+`formatting` (money and numbers behind one module) · `realtime` (connection lifecycle, subscription in
 an Effect, payload naming) · `performance` (memo policy, keys, code splitting) · `type-safety` (no `any`,
 `unknown` at boundaries, no non-null assertion, `satisfies`) · `cross-platform` (shared versus platform
 code, navigation versus router, secure storage).
