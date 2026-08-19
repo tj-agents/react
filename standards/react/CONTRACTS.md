@@ -69,6 +69,26 @@ server-owned → it is not in the `Request`.*
 > A genuine domain noun that happens to describe a pre-submit shape (`OrderDraft`) is not a stand-in for
 > `Request`. Keep it.
 
+## A read is consumed as it arrives — there is no view model
+
+Nothing maps a read into a parallel client-side shape. The query returns `Order` and components render
+`Order`. A `toOrderView(order)` layer buys a second type to keep in sync, a second place a field can be
+dropped, and a second thing to update when the server adds one.
+
+Derived values are computed where they are used — a `total`, a `isExpired`, a formatted date — not baked
+into a stored copy of the payload. Where a derivation is shared, it is a pure function taking the read
+type, not a new type wrapping it.
+
+**Two things are not view models and are fine:**
+
+- **Narrowing a `$type` union** to the member a component handles. That is the union doing its job.
+- **Reshaping for a specific renderer** — a chart's `{ x, y }[]`, a table's rows — built at the call site
+  from the read. That is presentation input, not a parallel contract, and it never round-trips back.
+
+**Litmus:** *does this new type exist so components can avoid touching the read type? → delete it and
+touch the read type.* The write direction is the opposite and deliberately so: a request is a genuinely
+different shape, and `write-boundary` owns where that reshape happens.
+
 ## Contract types live in the feature's `types.ts`
 
 Every feature owns one `features/<feature>/types.ts` holding its domain reads *and* its `XRequest` inputs.
