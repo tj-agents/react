@@ -23,6 +23,37 @@ The schema lives in `features/<feature>/schemas/`. Keep it aligned to the reques
 `type XRequest = z.infer<typeof xRequestSchema>`, which makes drift a compile error, while the naming and
 camelCase wire rules still hold.
 
+## Reshape on the way *into* the parse, never on the way out
+
+The example above passes `buffer` straight to `safeParse` because its shape already matches the request.
+Usually it does not: inputs are flat because that is how a form renders, and the request is nested because
+that is how the API models it.
+
+**Build the request shape as the argument to `safeParse`.** The schema then validates the thing actually
+being sent, `z.infer` still equals `XRequest`, and `parsed.data` goes to the mutation untouched.
+
+```ts
+const parsed = updateOrderRequestSchema.safeParse({
+  reference: buffer.reference,
+  delivery: {
+    line1: buffer.line1,
+    line2: buffer.line2 || undefined,      // an empty input is absent, not ""
+    postcode: buffer.postcode,
+  },
+  giftNote: buffer.isGift ? buffer.giftNote : undefined,
+});
+if (!parsed.success) return parsed;
+updateOrder(parsed.data);
+```
+
+**Mapping after the parse is the mistake**, and it is a quiet one: it puts a second shape between the
+validated data and the wire, so the thing you proved correct is not the thing you send. Every conditional
+drop (`isGift ? … : undefined`) and every empty-string-to-`undefined` normalization belongs in this
+argument too — they change what is valid, so they must happen before validation, not after it.
+
+The reshape lives in the feature's facade hook beside the `safeParse` call, not in the component. A
+component that assembles a nested request object is holding contract knowledge it should not have.
+
 **Client validation is a UX affordance, not a trust boundary.** The server re-validates every field
 regardless. Never drop a server check because the client has one.
 
