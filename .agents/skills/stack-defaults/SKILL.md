@@ -5,4 +5,4 @@ description: Which library to reach for in a TypeScript/React app and when — R
 
 # stack-defaults
 
-The standard is `standards/react/STACK.md` in `tomjseery/react-agents`, deployed to `~/.agents/standards/react/STACK.md`. Read it and follow it; this skill only routes to it.
+The standard is `standards/react/STACK.md` in `tomjseery/react-agents`, deployed to `~/.agents/standards/react-agents/react/STACK.md`. Read it and follow it; this skill only routes to it.
