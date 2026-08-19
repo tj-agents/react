@@ -14,7 +14,7 @@ Each row below has a skill that covers *how* to use it well; this skill only dec
 | Routing | **TanStack Router** | — |
 | Styling | **Tailwind**, `cn()`, **cva** for variants | — |
 | Dates and times | **dayjs**, behind one formatting module | — |
-| HTTP | one typed client per backend service | `http-layer` |
+| HTTP | **axios**, one instance per backend service | `http-layer` |
 | Tests | **Vitest** | — |
 | Tables | **TanStack Table** | — |
 
@@ -71,6 +71,6 @@ moment.
 
 ## Deliberately not used
 
-Redux, MobX, moment, styled-components or another CSS-in-JS runtime, a second HTTP client, a second date
-library, a utility library imported for one function. If one of these looks necessary, the interesting
+Redux, MobX, moment, styled-components or another CSS-in-JS runtime, a second HTTP client alongside axios
+(`fetch` wrappers, ky, superagent), a second date library, a utility library imported for one function. If one of these looks necessary, the interesting
 question is why the incumbent cannot do it — answer that first, in the PR.
