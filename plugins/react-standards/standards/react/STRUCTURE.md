@@ -14,8 +14,9 @@ derivation copied across disjoint owners.
 All logic — fetch, mutate, derive, orchestrate — lives in hooks. A component consumes a hook and renders.
 Two named tiers:
 
-- **Raw hook** — wraps one query or mutation and returns the library's result verbatim. The suffix is
-  mandatory: `useOrderQuery`, `useAcceptOrderMutation`. A bare name on a raw hook is the violation.
+- **Raw hook** — wraps one `useQuery`/`useMutation` and returns the library's result verbatim, `.data`,
+  `.isPending` and `.mutate` included. The suffix is mandatory: `useOrderQuery`,
+  `useAcceptOrderMutation`. A bare name on a raw hook is the violation.
 - **Facade hook** — composes raw hooks and returns a remapped **domain** object (`useOrder` →
   `{ order, isLoading }`, `useApply` → `{ apply, canApply }`). It takes the plain domain name *because* it
   is no longer a raw query — it is the app-facing API, and it is where orchestration lives: invalidations,
@@ -23,6 +24,9 @@ Two named tiers:
 
 Non-data hooks (`useDebounce`, `useIsMobile`) are neither and take no suffix. Hooks live in
 `features/<feature>/hooks/`, one concern per file.
+
+**Litmus:** *does the hook hand back the raw `useQuery`/`useMutation` object — `.data`, `.isPending`,
+`.mutate`? → `…Query`/`…Mutation`. Does it hand back a domain shape? → plain `useX`.*
 
 ```ts
 // CORRECT — orchestration in a facade hook; the component renders and calls it
