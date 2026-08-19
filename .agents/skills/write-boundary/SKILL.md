@@ -5,4 +5,4 @@ description: The client write boundary — every user-editable form validates it
 
 # write-boundary
 
-The standard is `standards/react/FORMS.md` in `tomjseery/react-agents`, deployed to `~/.agents/standards/react/FORMS.md`. Read it and follow it; this skill only routes to it.
+The standard is `standards/react/FORMS.md` in `tomjseery/react-agents`, deployed to `~/.agents/standards/react-agents/react/FORMS.md`. Read it and follow it; this skill only routes to it.
