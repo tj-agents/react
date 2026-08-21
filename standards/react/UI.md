@@ -35,11 +35,23 @@ const badgeVariants = cva("inline-flex items-center rounded-md border px-2 py-0.
 Primitives generated into `components/ui/` (the shadcn model over Radix) are **your files**. Edit them in
 place when the design needs it; they are not vendored dependencies to leave untouched and wrap.
 
-Two rules keep that from turning into drift:
+Three rules keep that from turning into drift:
 
 - **A primitive is generic.** No feature vocabulary, no domain type, no data fetching. The moment a
   primitive imports from a feature, it stopped being a primitive.
 - **A feature never re-implements one.** If the button needs a new tone, the button gains a variant.
+- **A component with no feature vocabulary belongs in `components/ui/`, not in the feature that first
+  needed it.** This applies just as much to something a feature is about to *invent* as to something
+  already in the tree — a loading spinner, an empty state, a confirm dialog shell take no domain type and
+  render the same regardless of which feature is loading or confirming. Reaching for `useState` and a
+  handful of Tailwind classes to knock one out inside `features/x/components/` feels cheap in the moment,
+  but the second feature that needs the same thing either copies the file (now two owners, one drifting)
+  or imports across feature boundaries (now a dependency the slice model forbids). Before writing a small
+  presentational component, check `components/ui/` first; if it isn't there and nothing about the
+  component depends on the feature's data or vocabulary, it starts there instead.
+
+**Litmus:** *would every feature that ever needed this render it identically? → `components/ui/`, written
+once. Does it know this feature's types or call this feature's api? → the feature's own `components/`.*
 
 Do not add a second component library alongside the primitives already in the tree, and do not add a
 CSS-in-JS runtime — the point of utilities plus owned primitives is that there is one place to look.
