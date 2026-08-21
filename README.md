@@ -46,19 +46,18 @@ pwsh .agents/sync-generated.ps1 -Check   # verify only; what CI runs
 
 ## Install
 
-Per machine, not per repo — `--scope user` makes one install cover every repo.
+Per machine, not per repo. From a clone of `Concertable/agent-standards`, provision this plugin together
+with its Concertable counterpart and the process/.NET plugins for both harnesses:
 
 ```
-/plugin marketplace add tomjseery/react-agents
-/plugin install react-standards@react-agents
+powershell -ExecutionPolicy Bypass -File scripts/provision-agent-standards.ps1
 ```
 
 ```
-codex plugin marketplace add https://github.com/tomjseery/react-agents
-codex plugin add react-standards@react-agents
+powershell -ExecutionPolicy Bypass -File scripts/provision-agent-standards.ps1 -VerifyOnly
 ```
 
-This repo is private, so the marketplace add needs git credentials that can read it. On Tommy's own
+This repo is private, so provisioning needs git credentials that can read it. On Tommy's own
 machine the trees are additionally junctioned into `~/.agents/` by `dotagents`'
 `.agents/deploy-skills.ps1`, which takes this repo as one of its source roots.
 
