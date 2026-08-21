@@ -9,11 +9,9 @@ explicit owners.
 The rule is about **cohesion, not file count.** More files are fine; the defect is the same state or
 derivation copied across disjoint owners.
 
-**This is a slice for what the *feature* owns — not a default home for anything the feature merely
-needs.** A component under `features/<feature>/components/` that names no type from `../types` and calls
-no api in `../api` isn't part of the slice; it's a generic primitive that landed in the wrong place because
-it was easiest to write beside the code that first wanted it. That's the `ui-components` skill's rule, not
-this one, and it bites here: the tell is a second feature independently growing the same small component.
+A component in `features/<feature>/components/` that names no type from `../types` and calls no api in
+`../api` isn't part of the slice — it's a generic primitive in the wrong place. That's `ui-components`'s
+rule.
 
 ## Hooks orchestrate; components render
 
