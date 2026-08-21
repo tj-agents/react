@@ -1,16 +1,20 @@
 {
   "name": "react-agents",
-  "description": "Generic TypeScript and React engineering standards, distributed as versioned, load-on-demand skills routing to a browsable standards tree. Names no product, so it applies to every React/TS repo.",
-  "owner": {
-    "name": "Tommy Seery"
+  "interface": {
+    "displayName": "React Agent Standards"
   },
   "plugins": [
     {
       "name": "react-standards",
-      "source": "./plugins/react-standards",
-      "description": "The generic TypeScript and React standard: which library for which job, type style against the wire, feature structure, server state and client state ownership, the zod write boundary, the HTTP layer, contract naming, and sharing code across apps built from one repo. Names no product.",
-      "category": "standards",
-      "keywords": ["standards", "typescript", "react", "tanstack-query", "zustand", "zod"]
+      "source": {
+        "source": "local",
+        "path": "./plugins/react-standards"
+      },
+      "policy": {
+        "installation": "INSTALLED_BY_DEFAULT",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
     }
   ]
 }
