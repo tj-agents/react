@@ -20,7 +20,8 @@ Two named tiers:
 - **Facade hook** — composes raw hooks and returns a remapped **domain** object (`useOrder` →
   `{ order, isLoading }`, `useApply` → `{ apply, canApply }`). It takes the plain domain name *because* it
   is no longer a raw query — it is the app-facing API, and it is where orchestration lives: invalidations,
-  buffer-to-request mapping, submit sequencing, listeners, navigate-versus-dialog branching.
+  submit sequencing, listeners, navigate-versus-dialog branching. For a form, this is the mutation only —
+  see `write-boundary` for why the form's own field state and validation live in `useForm`, not here.
 
 Non-data hooks (`useDebounce`, `useIsMobile`) are neither and take no suffix. Hooks live in
 `features/<feature>/hooks/`, one concern per file.
@@ -29,27 +30,25 @@ Non-data hooks (`useDebounce`, `useIsMobile`) are neither and take no suffix. Ho
 `.mutate`? → `…Query`/`…Mutation`. Does it hand back a domain shape? → plain `useX`.*
 
 ```ts
-// CORRECT — orchestration in a facade hook; the component renders and calls it
+// CORRECT — orchestration in a facade hook; the component's useForm calls it with the validated request
 function useInviteMember() {
   const mutation = useInviteMemberMutation();
-  const submit = (buffer: InviteBuffer) => {
-    const parsed = inviteMemberRequestSchema.safeParse(buffer);
-    if (parsed.success) mutation.mutate(parsed.data);
-    return parsed;                         // the component renders parsed.error inline
-  };
+  const submit = (request: InviteRequest, onDone: () => void) =>
+    mutation.mutate(request, { onSuccess: onDone });
   return { submit, isPending: mutation.isPending };
 }
 ```
 
 **The anti-patterns:**
 
-- **Mutation wiring inside a component** — instantiating a mutation and holding `handleSubmit` with an
+- **Mutation wiring inside a component** — instantiating a mutation and holding a submit handler with an
   inline `.mutate({…}, { onSuccess, onError })`, or building a whole request object in a submit handler.
-  Move it to a facade hook; the component keeps the controlled-input buffer and the JSX.
+  Move it to a facade hook; the component keeps the `useForm` call and the JSX.
 - **Side-effect orchestration in a component** — wiring a `window` listener, then a refetch, then
   branching, then opening a window. That is a hook.
-- **Derivation and validation in a component** — running a schema parse and computing totals inline.
-  Hoist it into the hook and render the result.
+- **A hand-rolled `safeParse` call in a component or a facade hook** instead of `useForm` +
+  `zodResolver` — see `write-boundary`. Hoist derivation that isn't form validation into the hook and
+  render the result.
 
 ## An Effect is for syncing with something outside React
 
