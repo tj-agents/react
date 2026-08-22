@@ -8,10 +8,15 @@ module kept out of components is the standard data-layer split, and it mirrors t
 outbound call gets a typed contract rather than hand-rolled request plumbing.
 
 ```ts
+const BASE = "/order";
+
 const orderApi = {
   checkout: async (orderId: number): Promise<Checkout> => {
-    const { data } = await api.post<Checkout>(`/order/${orderId}/checkout`);
+    const { data } = await api.post<Checkout>(`${BASE}/${orderId}/checkout`);
     return data;
+  },
+  cancel: async (orderId: number): Promise<void> => {
+    await api.post(`${BASE}/${orderId}/cancel`);
   },
 };
 export default orderApi;
@@ -23,6 +28,10 @@ export default orderApi;
   `{ responseType: "arraybuffer" }` and wrap the result in a `Blob`.
 - A package-local api file that only re-exposes a shared one is a **pure re-export**, never a copy.
 - Never hand-roll ad-hoc fetching where the api object expresses the call.
+- **The resource's route prefix is a `const BASE` at the top of the file, not a literal repeated in every
+  method.** A module that genuinely calls more than one resource declares one const per prefix
+  (`INVITATION_BASE`, etc.) rather than reusing `BASE` for a second thing. A rename should be a one-line
+  edit, not a find-and-replace across every method.
 
 ## One instance per backend service: bare in core, enhanced in the app tree
 
