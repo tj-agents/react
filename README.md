@@ -12,29 +12,32 @@ per-machine setup for both harnesses, and what a new project needs. This README 
 
 ## The standards map
 
-**The doc is the payload and the skill is a router.** A standard is a plain markdown file under
-`standards/react/`, and its skill is eight lines naming that file — so a repo can `@`-import the doc to
-make it always-on, or route to it by skill everywhere else.
+**The skill is the payload.** A standard is authored in exactly one file,
+`.agents/skills/<name>/SKILL.md` — front matter declaring `domain: react`, then the standard itself.
+There is no separate doc: `@`-import expands only inside `CLAUDE.md`/`AGENTS.md`, never inside a
+`SKILL.md`, so a skill naming a doc could only ever be a pointer that cost an extra Read for content the
+invocation always needed.
 
-**Look a topic up in [`standards/react/INDEX.md`](standards/react/INDEX.md) before writing a rule down**,
-so it lands in the one file that owns it. The index is generated from the tree, so it cannot drift from it.
+**Look a topic up in [`SKILLS.md`](SKILLS.md) before writing a rule down**, so it lands in the one skill
+that owns it. The catalogue is generated from the skill tree, so it cannot drift from it.
 
-A doc name never repeats its folder (`react/HTTP.md`, not `react/REACT_HTTP.md`) while skill names stay
-globally unique (`http-layer`), because the deployed skill namespace is flat and spans every stack.
+**A generic standard and its Concertable counterpart share a skill name on purpose** — `http-layer` here
+and `http-layer` in `agent-standards` — and the plugin namespace tells them apart:
+`react-standards:http-layer` against `react:http-layer`. Install whichever pair a repo needs and invoke
+the one you mean.
 
 ```
-standards/react/                   -> ~/.agents/standards/react/
-                                      The standards themselves. Source of truth — edit here.
+.agents/skills/                    Source of truth — edit here. One skill per standard: front
+                                   matter declaring its domain, then the standard itself.
 
-.agents/skills/                    -> ~/.agents/skills/
-                                      One router per doc: front matter plus that doc's path.
+SKILLS.md                          Generated catalogue: skill -> what it covers -> owning plugin.
 
 .agents/sync-generated.ps1         Regenerates .claude/skills/, plugins/react-standards/ and
-                                   INDEX.md. Refuses to write when a router and the tree
-                                   disagree. CI runs it with -Check.
+                                   SKILLS.md. Refuses to write when the skills and the plugin
+                                   payloads disagree. CI runs it with -Check.
 
-plugins/react-standards/           Generated. The installable plugin — its own full copy of the
-                                   tree, because a plugin cannot reference outside its root.
+plugins/react-standards/           Generated. The installable plugin — its own full copy of every
+                                   skill, because a plugin cannot reference outside its root.
 ```
 
 Run after any change to an authored file:
@@ -57,14 +60,13 @@ powershell -ExecutionPolicy Bypass -File scripts/provision-agent-standards.ps1
 powershell -ExecutionPolicy Bypass -File scripts/provision-agent-standards.ps1 -VerifyOnly
 ```
 
-This repo is private, so provisioning needs git credentials that can read it. On Tommy's own
-machine the trees are additionally junctioned into `~/.agents/` by `dotagents`'
-`.agents/deploy-skills.ps1`, which takes this repo as one of its source roots.
+This repo is private, so provisioning needs git credentials that can read it. Nothing here is junctioned
+onto a machine: this repo holds only standards, and the plugin is what delivers them.
 
 ## Named gaps — create the node, write the standard
 
-These slots are deliberately empty rather than silently missing. Adding one is a new doc in the tree plus
-its router; nothing else moves.
+These slots are deliberately empty rather than silently missing. Adding one is a new skill; nothing else
+moves.
 
 `component-design` (props typing, composition over configuration, when to split) · `loading-and-errors`
 (skeleton vs spinner, suspense and error boundaries, where pending renders) · `accessibility` ·
