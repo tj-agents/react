@@ -1,66 +1,160 @@
 # Testing
 
-Vitest. The question this file answers is **what to test at which level** — a frontend suite that tries to
-prove everything through rendered components is slow, brittle, and still misses the logic that actually
-breaks.
+This standard defines how an adopted frontend test suite is shaped. It does not authorize creating tests.
 
-## What earns a unit test
+## Adoption is explicit
 
-The layers where a bug is silent and cheap to catch:
+Do not add a test, install a test dependency, create a test setup, widen CI, or introduce a new test tier
+merely because production code changed or an untested unit exists. Tests may be authored only when the user
+explicitly requests them for the current work, or repo-owned guidance or a plan says that the relevant tier
+is adopted and requires them. A `test` script, test dependency, or a few existing files is not by itself an
+adoption decision.
 
-- **Pure logic** — resolution, permission and eligibility functions, mappers, derivations. These are the
-  highest-value tests in the repo and need no framework at all.
-- **API modules** — that each call hits the right method and URL and shapes its body correctly, with the
-  HTTP client mocked at its module boundary.
-- **Store logic** — that an action moves the store through the transition it claims to.
-- **Storage, consent and other browser-boundary wrappers** — the branches nobody exercises by hand.
-- **A hook whose orchestration is the point**, with its library boundaries mocked.
+When tests are not authorized, run the relevant existing suite if it is part of verification, and fix an
+existing test only when the production change legitimately invalidates it. Do not expand coverage. A test
+standard is never implicit permission to turn a production refactor into a test-infrastructure project.
 
-## What does not
+## Choose the narrowest honest tier
 
-**Do not test the library.** A test asserting that `useQuery` caches, that the router redirects, or that a
-primitive renders its children is testing someone else's code and fails on their next release.
+- **Vitest in Node** owns pure logic, schemas, request shaping, API modules, store transitions, storage
+  adapters, and orchestration that does not require a browser.
+- **A real-browser component project** owns isolated component contracts whose DOM behavior matters:
+  user interaction, focus, accessibility, browser APIs, CSS/layout-dependent behavior, and hard-to-reach
+  loading, empty, or error states.
+- **Browser end-to-end** owns routed workflows and collaboration among pages, browser storage, the real
+  backend, and deployment composition.
 
-**Do not prove a screen through the DOM when a browser suite already covers it.** Rendered
-component-and-navigation behaviour is what an end-to-end suite is for; duplicating it in Vitest buys a
-second, flakier copy. Reach for a rendering test when a *component itself* holds branching worth pinning —
-and if the repo has no rendering setup, that is a deliberate line, not an omission to quietly cross.
+Do not re-prove one behavior in every tier. Do not test a library's contract: React Query caching, router
+navigation, or a primitive rendering its children belongs to that library unless application-owned behavior
+changes the outcome.
 
-## Shape
+## Runner and environment
 
-Tests are colocated: `thing.test.ts` beside `thing.ts`. There is no parallel `__tests__` tree — a test that
-sits next to its subject gets moved and deleted along with it.
+Vitest is the default unit runner. Keep Node as the default environment; a whole-suite `jsdom` setting makes
+pure tests pay for a simulated browser and can hide browser-only assumptions. Use named
+[Vitest projects](https://vitest.dev/guide/projects) when a repository has more than one environment.
 
-The default environment is `node`. Opt a project into a DOM environment only where something under test
-genuinely touches the DOM; the node default is what keeps the suite fast.
+For a newly adopted web component tier, prefer
+[Vitest Browser Mode](https://vitest.dev/guide/browser/component-testing) with its Playwright provider in a
+Vite application. If the repository already standardizes on Playwright Test, use its stable
+[`@playwright/test` component mount](https://playwright.dev/docs/test-components) and story-gallery model.
+Do not introduce `@playwright/experimental-ct-*`; the stable Playwright component model supersedes it. Do
+not add a second component harness to a repository that already has a supported one.
+
+`jsdom` is acceptable for an established Testing Library suite or a small DOM-only compatibility case. It
+is not the default for new component-test architecture where a real browser is available.
+
+## Files and names
+
+Colocate a test with its subject as `thing.test.ts` or `thing.test.tsx`. Use `.spec` instead only when that is
+the repository's established spelling; Vitest recognizes both and neither is more modern. Choose one
+spelling per repository. Do not create a parallel `__tests__` tree for new code.
+
+Test names state observable behavior, not the method under test and not a generic "should work". A name must
+still explain the regression after the implementation is renamed.
+
+## Pure logic, API modules, and stores
+
+Pure functions and schema boundaries are the highest-value Node tests because they are deterministic and
+need no renderer.
+
+An API-module unit test may mock the one HTTP client boundary the module owns to pin method, URL, and body
+shaping. A hook or component test should normally exercise the request through MSW and assert the resulting
+application behavior instead of mocking the API module and every collaborator below it.
+
+Reset a store to a known state for every test. Assert application-owned transitions through its public
+actions; do not render a component merely to reach store logic that can be exercised directly.
+
+For React Query tests, create a fresh `QueryClient` per test or wrapper, disable retries unless retry behavior
+is the subject, and clear or dispose it after use. Shared caches make tests order-dependent.
+
+## Component behavior
+
+Follow [Testing Library's guiding principle](https://testing-library.com/docs/guiding-principles): interact
+with the component as a user does and assert observable output, not component instances, private state,
+implementation classes, or hook call counts.
+
+Prefer accessible queries in this order: role plus accessible name, label, visible text, then test ID only
+when the UI has no semantic selector. Use the browser runner's real interactions in Browser Mode. In a
+Testing Library DOM suite, create `const user = userEvent.setup()` inside the test before rendering and
+await every interaction. Use `fireEvent` only for an interaction `user-event` cannot express.
+
+Render the smallest meaningful component boundary with the real child components it owns. If one assertion
+requires mocks for half the feature, move the test down to the logic boundary or up to the browser suite.
+
+## Network behavior with MSW
+
+Use MSW when the unit crosses the network boundary. Keep the infrastructure explicit:
+
+- `mocks/handlers.ts` composes successful baseline handlers, split by feature/domain once the list grows;
+- `mocks/server.ts` contains only `setupServer(...handlers)` for Node-run tests;
+- the test setup calls `server.listen({ onUnhandledRequest: "error" })`, resets handlers after every test,
+  and closes the server after the suite;
+- individual tests use `server.use(...)` for errors and other scenario overrides.
+
+`mocks/handlers.ts`
 
 ```ts
-const mocks = vi.hoisted(() => ({ request: vi.fn() }));
-vi.mock("@/lib/apiClient", () => ({ apiClient: { request: mocks.request } }));
+import { http, HttpResponse } from "msw";
 
-describe("actionLinkApi", () => {
-  beforeEach(() => vi.clearAllMocks());
-
-  it("executes the advertised method without duplicating the API prefix", async () => {
-    …
-  });
-});
+export const handlers = [
+  http.get("https://api.example.test/projects", () =>
+    HttpResponse.json([{ id: "project-1", name: "Apollo" }]),
+  ),
+];
 ```
 
-**`vi.hoisted` for anything a `vi.mock` factory closes over** — the factory is hoisted above the file's
-imports, so a plain `const` above it is still undefined when it runs.
+`mocks/server.ts`
 
-**Mock at the module boundary you own**, one level out: the HTTP client, the query client, the router. A
-test that mocks six modules to reach one assertion is telling you the unit has too many collaborators —
-fix the unit.
+```ts
+import { setupServer } from "msw/node";
+import { handlers } from "./handlers";
 
-**A test name states the behaviour, not the method.** "executes the advertised method without duplicating
-the API prefix" survives a rename and tells the next reader what broke; "test getById" does neither.
+export const server = setupServer(...handlers);
+```
 
-`beforeEach(() => vi.clearAllMocks())` in every suite that mocks; undo global stubs in `afterEach`. A test
-that passes only when run after its neighbour is worse than no test.
+`setupTests.ts`
 
-## Coverage is a signal, never a target
+```ts
+import { afterAll, afterEach, beforeAll } from "vitest";
+import { server } from "./mocks/server";
 
-Chase the branches that would ship a real defect. A number the suite must hit produces tests written to
-raise the number, which is exactly the test nobody trusts when it fails.
+beforeAll(() => server.listen({ onUnhandledRequest: "error" }));
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+```
+
+Override only the scenario in the test:
+
+```ts
+import { http, HttpResponse } from "msw";
+import { server } from "./mocks/server";
+
+server.use(
+  http.get("https://api.example.test/projects", () => new HttpResponse(null, { status: 500 })),
+);
+```
+
+This follows MSW's official [Node lifecycle](https://mswjs.io/docs/integrations/node) and
+[handler structure](https://mswjs.io/docs/best-practices/structuring-handlers). Do not turn one `server.ts`
+into a product-wide fixture database.
+
+Do not spy on handlers to prove that a request happened. Describe request validity in the handler and assert
+how the application responds, as MSW's
+[request-assertion guidance](https://mswjs.io/docs/best-practices/avoid-request-assertions) recommends. Direct
+request assertions are reserved for one-way effects such as analytics where no application result exists.
+
+## Mocking and isolation
+
+Mock one owned boundary out, not every module below the subject. Prefer dependency seams and network
+behavior over mocking React, the router, or query-library internals.
+
+Anything a `vi.mock` factory closes over is created with `vi.hoisted`. Clear mocks between tests; restore
+spies and global stubs after each test. Keep deterministic time behind fake timers or an injected clock, and
+restore real timers before the test ends.
+
+## Coverage
+
+Coverage locates unexamined branches; it is not a target. Percentage quotas reward assertions that raise a
+number rather than protect behavior. A repository may enforce a non-regression gate, but the standard never
+uses coverage to decide what deserves a test.
