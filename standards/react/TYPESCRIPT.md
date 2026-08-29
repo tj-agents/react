@@ -40,6 +40,10 @@ type a field `| null` merely to mirror a nullable server type** — the API may 
 `!= null`), so a wire `null` reads the same as absent. Introduce `null` only when something downstream
 genuinely branches on the difference.
 
+**Exception — a `queryFn`'s own return value.** React Query v5 throws on an `undefined` resolution, so a
+value awaited directly inside, or returned unchanged as, a `queryFn` is the one place this default
+inverts: it must be `T | null`, never `T | undefined`. See the `server-state` skill.
+
 ## Server polymorphism is a discriminated union on the wire discriminator
 
 Where the server emits a discriminator field for a polymorphic payload, model it as a discriminated union
