@@ -23,6 +23,38 @@ instance. That is a `useQuery`, which fires on mount and dedupes by key, not
 **Litmus:** *reading or writing server data? → a `useQuery`/`useMutation` hook. Reaching for `useEffect` or
 `useState` to load or send it? → that's the violation.*
 
+## A `queryFn` may never resolve to `undefined`
+
+React Query v5 throws `Query data cannot be undefined` the instant a `queryFn` resolves to `undefined` —
+a runtime throw the moment that branch is hit, not a lint warning. This is the one place the
+`typescript-style` skill's "absent values default to `undefined`" default is wrong: an api-module call
+that is awaited directly inside, or handed unchanged as, a `queryFn` — and whose result can genuinely come
+back empty (a 404 the client treats as "not found yet", a 204, a `null` JSON body) — must resolve to
+`T | null`, never `T | undefined`.
+
+```ts
+// WRONG — the undefined branch crashes the query the moment a caller has none yet
+getMine: async (): Promise<Thing | undefined> => {
+  const { data, status } = await api.get<Thing>(BASE);
+  return status === 204 ? undefined : data;
+},
+
+// CORRECT
+getMine: async (): Promise<Thing | null> => {
+  const { data, status } = await api.get<Thing>(BASE);
+  return status === 204 ? null : data;
+},
+```
+
+A hook built on top of that call may still normalize back to `undefined` for its own **public** return
+type (`query.data ?? undefined`) — that conversion runs after the promise has already resolved, so it
+never reaches the `queryFn` contract. The rule binds only the raw value a `queryFn` awaits or returns
+unwrapped.
+
+**Litmus:** *awaited directly inside, or handed unchanged as, a `queryFn`? → `T | null`, never
+`T | undefined`. Everywhere else — DTOs, request bodies, ordinary optional fields — the `typescript-style`
+default of `undefined` still applies.*
+
 ## Query keys — arrays, generic to specific, one factory per feature
 
 Keys are arrays ordered most-generic to most-specific with the resource name first —
