@@ -1,13 +1,12 @@
 # react-agents
 
 The generic TypeScript and React engineering standards — every React/TS repo Tommy owns, naming no
-product. The .NET half lives in `tomjseery/dotagents`; the stack-agnostic method — branching, plans,
-reviews, merging, and the hooks that enforce them — lives in `tomjseery/process-agents`; anything
-Concertable-specific lives in `Concertable/agent-standards`.
+product. The .NET half lives in `tomjseery/dotagents`; anything Concertable-specific lives in
+`Concertable/agent-standards`.
 
 **How this is authored and delivered — read
 [`dotagents/ARCHITECTURE.md`](https://github.com/tomjseery/dotagents/blob/main/ARCHITECTURE.md) before
-changing the shape of any of it.** It is the one home for the five tiers and why the repos stay separate,
+changing the shape of any of it.** It is the one home for the four tiers and why the repos stay separate,
 the authoring → generate → install chain (a plugin *copies* its payload; it can never reference one), the
 per-machine setup for both harnesses, and what a new project needs. This README does not restate it.
 
