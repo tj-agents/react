@@ -35,11 +35,13 @@ const badgeVariants = cva("inline-flex items-center rounded-md border px-2 py-0.
 Primitives generated into `components/ui/` (the shadcn model over Radix) are **your files**. Edit them in
 place when the design needs it; they are not vendored dependencies to leave untouched and wrap.
 
-Two rules keep that from turning into drift:
+Three rules keep that from turning into drift:
 
 - **A primitive is generic.** No feature vocabulary, no domain type, no data fetching. The moment a
   primitive imports from a feature, it stopped being a primitive.
 - **A feature never re-implements one.** If the button needs a new tone, the button gains a variant.
+- **A new generic component starts in `components/ui/`, not in the feature that first needed it.** Write
+  it once, up front, where the next feature will find it instead of copying it.
 
 Do not add a second component library alongside the primitives already in the tree, and do not add a
 CSS-in-JS runtime — the point of utilities plus owned primitives is that there is one place to look.

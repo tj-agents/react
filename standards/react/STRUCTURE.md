@@ -9,6 +9,10 @@ explicit owners.
 The rule is about **cohesion, not file count.** More files are fine; the defect is the same state or
 derivation copied across disjoint owners.
 
+A component in `features/<feature>/components/` that names no type from `../types` and calls no api in
+`../api` isn't part of the slice — it's a generic primitive in the wrong place. That's `ui-components`'s
+rule.
+
 ## Hooks orchestrate; components render
 
 All logic — fetch, mutate, derive, orchestrate — lives in hooks. A component consumes a hook and renders.
