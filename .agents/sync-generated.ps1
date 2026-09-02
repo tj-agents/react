@@ -31,7 +31,7 @@ Generated:
 Plugins carry the domains `.agents/plugins/payloads.json` assigns them: a .NET project installs
 `dotnet-standards` from `tomjseery/dotagents` and must not also receive this corpus. This repo holds only
 routers, so nothing here generates a utility stub. The write-time router hook lives in
-`Concertable/agent-standards` and ships in its `agent-process` plugin, so a project wanting enforcement
+`Concertable/agent-standards` and ships in its `concertable` plugin, so a project wanting enforcement
 installs that too. Apart from this paragraph the script is byte-identical to the `dotagents` copy;
 `ARCHITECTURE.md` there records why the copies are kept rather than shared.
 
