@@ -29,7 +29,7 @@ Generated:
                                    .claude-plugin/plugin.json and .codex-plugin/plugin.json.
 
 Plugins carry the domains `.agents/plugins/payloads.json` assigns them: a .NET project installs
-`dotnet-standards` from `tomjseery/dotagents` and must not also receive this corpus. This repo holds only
+`dotnet@dotagents` and must not also receive this corpus. This repo holds only
 routers, so nothing here generates a utility stub. The write-time router hook lives in
 `Concertable/agents` and ships in its `concertable` plugin, so a project wanting enforcement
 installs that too. Apart from this paragraph the script is byte-identical to the `dotagents` copy;
