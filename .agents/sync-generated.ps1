@@ -29,9 +29,9 @@ Generated:
                                    .claude-plugin/plugin.json and .codex-plugin/plugin.json.
 
 Plugins carry the domains `.agents/plugins/payloads.json` assigns them: a .NET project installs
-`dotnet-standards` from `tomjseery/dotagents` and must not also receive this corpus. This repo holds only
+`dotnet@dotagents` and must not also receive this corpus. This repo holds only
 routers, so nothing here generates a utility stub. The write-time router hook lives in
-`Concertable/agent-standards` and ships in its `concertable` plugin, so a project wanting enforcement
+`Concertable/agents` and ships in its `concertable` plugin, so a project wanting enforcement
 installs that too. Apart from this paragraph the script is byte-identical to the `dotagents` copy;
 `ARCHITECTURE.md` there records why the copies are kept rather than shared.
 
@@ -90,6 +90,15 @@ function Get-CanonicalDescription([string]$text, [string]$name) {
     return $description
 }
 
+function Assert-ContractKind([string]$text, [string]$name) {
+    $match = [regex]::Match($text, "(?m)^kind:[ 	]*(\S+)[ 	]*$")
+    if (-not $match.Success) {
+        throw "$name/SKILL.md has no kind in its front matter."
+    }
+    if ($match.Groups[1].Value -ne 'contract') {
+        throw "$name/SKILL.md has kind '$($match.Groups[1].Value)'; stack-standard skills must be contract."
+    }
+}
 # A router's single authored fact about its payload: the doc's root-relative path, in backticks. Parsed
 # rather than held in a side table, because a second structure is a second thing that drifts. No match
 # means a utility, which owns no doc.
@@ -141,6 +150,7 @@ if (-not $skillDirs) { throw "No canonical skills found under .agents/skills." }
 $skills = [ordered]@{}
 foreach ($dir in $skillDirs) {
     $text = Read-Lf (Join-Path $dir.FullName 'SKILL.md')
+    Assert-ContractKind $text $dir.Name
     $skills[$dir.Name] = [pscustomobject]@{
         Name        = $dir.Name
         Body        = $text
