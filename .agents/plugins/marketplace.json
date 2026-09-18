@@ -5,10 +5,10 @@
   },
   "plugins": [
     {
-      "name": "react-standards",
+      "name": "react",
       "source": {
         "source": "local",
-        "path": "./plugins/react-standards"
+        "path": "./plugins/react"
       },
       "policy": {
         "installation": "INSTALLED_BY_DEFAULT",
