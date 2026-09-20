@@ -19,15 +19,15 @@ Each row below has a skill that covers *how* to use it well; this skill only dec
 
 | Job | Reach for | Depth |
 |---|---|---|
-| Server state — anything fetched from an API | **React Query** | `server-state` |
-| Shared client state | **Zustand** | `client-state` |
-| Parsing and validating untrusted input | **zod** | `write-boundary` |
-| Routing | **TanStack Router** | `routing` |
-| Styling | **Tailwind**, `cn()`, **cva** for variants | `ui-components` |
-| Dates and times | **dayjs**, behind one formatting module | `date-formatting` |
-| HTTP | **axios**, one instance per backend service | `http-layer` |
-| Tests | **Vitest** | `frontend-testing` |
-| Tables | **TanStack Table** | `data-tables` |
+| Server state — anything fetched from an API | **React Query** | `react:server-state` |
+| Shared client state | **Zustand** | `react:client-state` |
+| Parsing and validating untrusted input | **zod** | `react:write-boundary` |
+| Routing | **TanStack Router** | `react:routing` |
+| Styling | **Tailwind**, `cn()`, **cva** for variants | `react:ui-components` |
+| Dates and times | **dayjs**, behind one formatting module | `react:date-formatting` |
+| HTTP | **axios**, one instance per backend service | `react:http-layer` |
+| Tests | **Vitest** | `react:frontend-testing` |
+| Tables | **TanStack Table** | `react:data-tables` |
 
 ## Zustand over a reducer, in most cases
 
@@ -51,7 +51,7 @@ immer rather than hand-written spread chains.
 
 Anything crossing into the app from outside is parsed, and the **parsed** value is what the app uses:
 
-- a form buffer at submit — see `write-boundary`;
+- a form buffer at submit — see `react:write-boundary`;
 - route **search params**, through the router's own validation hook, so a bad URL is a typed failure
   rather than an undefined read three components deep;
 - environment configuration at startup, so a missing variable fails immediately and visibly instead of

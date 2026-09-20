@@ -28,7 +28,7 @@ where a concrete requirement cannot be met by the bound hook, and document that 
 
 | Kind | Home |
 |---|---|
-| Server state | the query cache, observed through reader hooks — see `server-state` |
+| Server state | the query cache, observed through reader hooks — see `react:server-state` |
 | Persisted client choices (an active selection, a dismissed banner) | one private store per owning feature |
 | React consumers | a facade hook composing query, store selectors, derivation, invalidation, navigation |
 | Non-React consumers (route guards, request headers, logout) | one internal service/session object |
