@@ -10,7 +10,13 @@
       "source": "./plugins/react",
       "description": "Generic React and TypeScript engineering standards.",
       "category": "Productivity",
-      "keywords": ["standards", "typescript", "react", "state", "zod"]
+      "keywords": [
+        "standards",
+        "typescript",
+        "react",
+        "state",
+        "zod"
+      ]
     }
   ]
 }

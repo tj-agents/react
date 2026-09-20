@@ -1,6 +1,51 @@
 {
-  "$comment": "Which standards domains each plugin ships. Generator input only - neither harness reads this file. It is not derivable from anything else: a plugin's name does not imply its domains, and a consumer installs per stack, so the split is a deliberate authored decision. The generator cross-checks it against marketplace.json both ways, so a plugin cannot be declared here and missing there, or the reverse.",
+  "description": "Generic React and TypeScript guidance with an explicit framework core and independently selectable library and repository-shape profiles.",
+  "publicPlugins": [
+    "react"
+  ],
   "payloads": {
-    "react": ["react"]
+    "react": [
+      "react"
+    ]
+  },
+  "profiles": {
+    "core": [
+      "contract-naming",
+      "react-structure",
+      "typescript-style"
+    ],
+    "client-state": [
+      "client-state"
+    ],
+    "data-tables": [
+      "data-tables"
+    ],
+    "dates": [
+      "date-formatting"
+    ],
+    "testing": [
+      "frontend-testing"
+    ],
+    "http": [
+      "http-layer"
+    ],
+    "routing": [
+      "routing"
+    ],
+    "server-state": [
+      "server-state"
+    ],
+    "selected-stack": [
+      "stack-defaults"
+    ],
+    "app-tiers": [
+      "tiered-shared-code"
+    ],
+    "ui": [
+      "ui-components"
+    ],
+    "validation": [
+      "write-boundary"
+    ]
   }
 }
