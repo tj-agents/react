@@ -75,6 +75,14 @@ class SourceLayoutTests(unittest.TestCase):
                     offenders.append(f"{name}: {namespace}:{target}")
         self.assertEqual([], offenders)
 
+    def test_bare_and_qualified_skill_references_resolve(self) -> None:
+        broken = dict(self.skills["react-structure"])
+        broken["body"] = broken["body"] + "\nSee the `missing-capability` skill.\n"
+        copied = dict(self.skills)
+        copied["react-structure"] = broken
+        with self.assertRaisesRegex(ValueError, "missing bare skill reference"):
+            sync_generated.validate(ROOT, self.config, self.payloads, copied)
+
     def test_host_manifests_reject_drift_and_cache_pinning(self) -> None:
         codex = json.loads((ROOT / ".agents/plugins/manifests/codex/react.json").read_text(encoding="utf-8"))
         claude = json.loads((ROOT / ".agents/plugins/manifests/claude/react.json").read_text(encoding="utf-8"))

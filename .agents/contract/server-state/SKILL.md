@@ -14,7 +14,7 @@ provenance: framework, selected-library
 ## React Query owns all server state
 
 Every server **read** is a `useQuery` and every server **write** is a `useMutation`, wrapped in a per-feature hook
-(naming in the `react-structure` skill). **Never call an api module from a `useEffect`, and never hand-roll
+(naming in the `react:react-structure` skill). **Never call an api module from a `useEffect`, and never hand-roll
 `useState` + `useEffect` + a promise to load or send server data.**
 
 React Query already owns caching, request **dedup** (including a strict-mode dev double-mount), retries,
@@ -34,6 +34,19 @@ instance. That is a `useQuery`, which fires on mount and dedupes by key, not
 **Litmus:** *reading or writing server data? → a `useQuery`/`useMutation` hook. Reaching for `useEffect` or
 `useState` to load or send it? → that's the violation.*
 
+## Raw query hooks and feature-facing hooks
+
+A **raw query hook** wraps one `useQuery` or `useMutation` call and returns the library result verbatim.
+Name it with the required `Query` or `Mutation` suffix: `useOrderQuery`, `useAcceptOrderMutation`. A bare
+domain name on a raw hook hides the third-party result shape.
+
+A **feature-facing hook** composes raw hooks and returns domain values and actions, such as
+`useOrder() -> { order, isLoading }`. It owns invalidation, submit sequencing, and other orchestration that
+would otherwise be copied into components. Non-data hooks such as `useDebounce` remain ordinary hooks.
+
+**Litmus:** *does the hook return `.data`, `.isPending`, or `.mutate` from TanStack Query? Use the
+`Query`/`Mutation` suffix. Does it expose a domain-shaped API? Use the plain domain name.*
+
 ## Query keys — arrays, generic to specific, one factory per feature
 
 Keys are arrays ordered most-generic to most-specific with the resource name first —
@@ -49,6 +62,6 @@ keys in one exported factory object, so a key and its invalidations cannot drift
   takes only the per-submit variables. Don't thread a fixed id through the mutation call if the hook already
   closed over it.
 
-The parse that turns a buffer into a request is the `write-boundary` skill's subject.
+The parse that turns a buffer into a request is the `react:write-boundary` skill's subject.
 
 **Litmus:** *changes per submit → a mutation variable. Fixed for the hook's life → bound inside the hook.*

@@ -1,6 +1,6 @@
 ---
 name: react-structure
-description: How React code is organized — the feature slice (`types`/`api`/`hooks`/`components`/`pages`/`schemas` under one folder), hooks that orchestrate versus components that only render, the raw-hook/facade-hook split, what an Effect is actually for and the "you might not need an Effect" traps (event handlers for events, render-time computation for derived data, a query for server data), and dispatching on a closed key through one exhaustive table rather than a switch copy-pasted across components. Use when adding a feature folder, deciding whether logic belongs in a component or a hook, reaching for `useEffect`, or writing a second branch on the same discriminator or role.
+description: How React code is organized — feature slices with explicit owners, hooks for reusable stateful orchestration and external integration, components that handle immediate UI events and render, Effects reserved for synchronization outside React, derived values computed during render, and closed-key behavior dispatched through one exhaustive table. Use when adding a feature folder, deciding whether logic belongs in a component or hook, reaching for useEffect, or writing a second branch on the same discriminator.
 kind: contract
 domain: react
 profile: core
@@ -22,45 +22,22 @@ derivation copied across disjoint owners.
 
 ## Hooks orchestrate; components render
 
-All logic — fetch, mutate, derive, orchestrate — lives in hooks. A component consumes a hook and renders.
-Two named tiers:
+A hook owns reusable stateful orchestration or integration with something outside the component. A component
+owns immediate UI input state, handles the user's event, consumes hooks, and renders their result. Hooks live
+in `features/<feature>/hooks/`, one concern per file.
 
-- **Raw hook** — wraps one `useQuery`/`useMutation` and returns the library's result verbatim, `.data`,
-  `.isPending` and `.mutate` included. The suffix is mandatory: `useOrderQuery`,
-  `useAcceptOrderMutation`. A bare name on a raw hook is the violation.
-- **Facade hook** — composes raw hooks and returns a remapped **domain** object (`useOrder` →
-  `{ order, isLoading }`, `useApply` → `{ apply, canApply }`). It takes the plain domain name *because* it
-  is no longer a raw query — it is the app-facing API, and it is where orchestration lives: invalidations,
-  buffer-to-request mapping, submit sequencing, listeners, navigate-versus-dialog branching.
-
-Non-data hooks (`useDebounce`, `useIsMobile`) are neither and take no suffix. Hooks live in
-`features/<feature>/hooks/`, one concern per file.
-
-**Litmus:** *does the hook hand back the raw `useQuery`/`useMutation` object — `.data`, `.isPending`,
-`.mutate`? → `…Query`/`…Mutation`. Does it hand back a domain shape? → plain `useX`.*
-
-```ts
-// CORRECT — orchestration in a facade hook; the component renders and calls it
-function useInviteMember() {
-  const mutation = useInviteMemberMutation();
-  const submit = (buffer: InviteBuffer) => {
-    const parsed = inviteMemberRequestSchema.safeParse(buffer);
-    if (parsed.success) mutation.mutate(parsed.data);
-    return parsed;                         // the component renders parsed.error inline
-  };
-  return { submit, isPending: mutation.isPending };
-}
-```
+Library-specific adapters belong to the optional contract that selects that library. Core React structure does
+not prescribe a query library, state store, HTTP client, form validator, router, or styling system. When a
+repository selects one of those profiles, its adapter hook may sit behind a plain feature-facing hook so the
+component still consumes domain values and actions rather than a third-party API.
 
 **The anti-patterns:**
 
-- **Mutation wiring inside a component** — instantiating a mutation and holding `handleSubmit` with an
-  inline `.mutate({…}, { onSuccess, onError })`, or building a whole request object in a submit handler.
-  Move it to a facade hook; the component keeps the controlled-input buffer and the JSX.
-- **Side-effect orchestration in a component** — wiring a `window` listener, then a refetch, then
-  branching, then opening a window. That is a hook.
-- **Derivation and validation in a component** — running a schema parse and computing totals inline.
-  Hoist it into the hook and render the result.
+- **Reusable orchestration copied into components** — if multiple screens coordinate the same state and external
+  effect, give that concern one hook.
+- **Derived values stored as state** — compute them from current props and state during render.
+- **A hook created only to hide one expression** — ordinary event handling and render-time calculation remain in
+  the component when they are local and readable.
 
 ## An Effect is for syncing with something outside React
 
@@ -74,7 +51,7 @@ Route by trigger:
 |---|---|
 | An event (click, open, submit) | an event handler |
 | Derived from existing state | computed in render |
-| Server data, read or write | a query or mutation hook (see `server-state`) |
+| Server data, read or write | the repository's selected data adapter (see the `react:server-state` skill when applicable) |
 
 ## Dispatch on a closed key with one table
 
