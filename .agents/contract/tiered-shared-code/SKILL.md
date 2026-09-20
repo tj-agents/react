@@ -85,7 +85,7 @@ export interface TenantIdentity { user: User; memberships: Membership[]; }
 
 Because that product identity module holds stateful domain data — which tenant is active, what the
 memberships are — it is also the feature that owns that reactive state; the two patterns land on the same
-module (see `client-state`).
+module (see `react:client-state`).
 
 **The anti-patterns:**
 
@@ -95,4 +95,4 @@ module (see `client-state`).
   shared type lying about its shape. The typed product `/me` removes the cast: the field is typed where it
   is real.
 - **Two discriminants on one union** — narrowing on a role while the wire polymorphism keys on something
-  else. Pick one key (see `typescript-style`).
+  else. Pick one key (see `react:typescript-style`).

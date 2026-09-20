@@ -72,7 +72,7 @@ export interface SignatureRequest {
   `signContract(contractId, signature)`.
 - **Share one `XRequest`** where create and update take the identical writable shape; split into
   `CreateXRequest`/`UpdateXRequest` the moment they diverge.
-- Absence follows the `undefined` rule in the `typescript-style` skill.
+- Absence follows the `undefined` rule in the `react:typescript-style` skill.
 
 **Litmus:** *could the client legitimately set this field on the way in? No — it's a route id, or
 server-owned → it is not in the `Request`.*
@@ -98,7 +98,7 @@ type, not a new type wrapping it.
 
 **Litmus:** *does this new type exist so components can avoid touching the read type? → delete it and
 touch the read type.* The write direction is the opposite and deliberately so: a request is a genuinely
-different shape, and `write-boundary` owns where that reshape happens.
+different shape, and `react:write-boundary` owns where that reshape happens.
 
 ## Contract types live in the feature's `types.ts`
 
