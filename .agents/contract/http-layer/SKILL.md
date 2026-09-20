@@ -88,7 +88,7 @@ useMutation({ mutationFn, onError: () => toast.error("Failed to save.") });
 - **A feature-local `onError` toast**, firing on top of the global handler.
 - **A `try/catch` around a `mutateAsync` call to toast** — the same double-report, spelled with a catch.
 - **A validation message shown via toast** — that belongs inline beside the field, from the parse result
-  (see the `write-boundary` skill).
+  (see the `react:write-boundary` skill).
 
 **Litmus:** *writing a `catch` to toast an API error? Stop — the query client already did. Catch only to
 change control flow.*

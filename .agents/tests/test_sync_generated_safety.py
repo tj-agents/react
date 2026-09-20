@@ -4,6 +4,7 @@ import importlib.util
 import json
 from pathlib import Path
 import tempfile
+from unittest import mock
 import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -36,6 +37,16 @@ class GeneratedRootSafetyTests(unittest.TestCase):
             config["generated_roots"] = ["." if item == "plugins" else item for item in config["generated_roots"]]
             with self.assertRaisesRegex(ValueError, "fixed repository-owned"):
                 sync_generated.validated_generated_roots(Path(temporary), config)
+
+
+    def test_generated_root_link_ancestor_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            (root / ".codex").mkdir()
+            original = Path.is_symlink
+            with mock.patch.object(Path, "is_symlink", autospec=True, side_effect=lambda path: path.name == ".codex" or original(path)):
+                with self.assertRaisesRegex(ValueError, "ancestor"):
+                    sync_generated.validated_generated_roots(root, self.config())
 
 
 if __name__ == "__main__":

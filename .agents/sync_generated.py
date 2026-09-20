@@ -12,6 +12,7 @@ import shutil
 FRONTMATTER = re.compile(r"\A---\n(?P<header>.*?)\n---\n(?P<body>.*)\Z", re.DOTALL)
 NAME = re.compile(r"^[a-z][a-z0-9-]*$")
 QUALIFIED_SKILL = re.compile(r"(?<![-/\w])(react|engineering):(?!:)([a-z][a-z0-9-]+)")
+BARE_SKILL_REFERENCE = re.compile(r"`([a-z][a-z0-9-]+)`\s+skill(?:'s)?")
 REQUIRED_METADATA = ("name", "description", "kind", "domain", "profile", "applicability", "requires", "provenance")
 RESERVED_AGENT_DIRS = {"plugins", "skills", "tests"}
 EXPECTED_GENERATED_ROOTS = (
@@ -166,6 +167,9 @@ def validate(root: Path, config: dict, payloads: dict, skills: dict[str, dict]) 
         for namespace, name in QUALIFIED_SKILL.findall(skill["body"]):
             if namespace == "react" and name not in skills:
                 raise ValueError(f"{skill['name']}: missing local skill reference {namespace}:{name}")
+        for name in BARE_SKILL_REFERENCE.findall(skill["body"]):
+            if name not in skills:
+                raise ValueError(f"{skill['name']}: missing bare skill reference {name}")
     codex = load(root / EXPECTED_HOST_MANIFEST_ROOTS["codex"] / "react.json")
     claude = load(root / EXPECTED_HOST_MANIFEST_ROOTS["claude"] / "react.json")
     codex_marketplace = load(root / EXPECTED_MARKETPLACE_TEMPLATES["codex"])
@@ -245,6 +249,12 @@ def validated_generated_roots(root: Path, config: dict) -> list[Path]:
         if relative.is_absolute() or ".." in relative.parts:
             raise ValueError(f"Invalid generated root: {value}")
         lexical = resolved_root.joinpath(*relative.parts)
+        ancestor = resolved_root
+        for part in relative.parts:
+            ancestor = ancestor / part
+            is_junction = getattr(ancestor, "is_junction", lambda: False)()
+            if ancestor.exists() and (ancestor.is_symlink() or is_junction):
+                raise ValueError(f"Generated root ancestor must not be a link or junction: {ancestor}")
         path = lexical.resolve()
         if path == resolved_root or not path.is_relative_to(resolved_root):
             raise ValueError(f"Generated root escapes or equals repository root: {value}")
