@@ -1,30 +1,34 @@
 # react-agents
 
-Generic React and TypeScript engineering contracts for Claude Code and Codex.
+Generic React and TypeScript guidance for Claude Code and Codex, published as `react@react-agents`.
 
-The react-agents marketplace publishes one plugin, react. Canonical skills live under .agents/skills and
-standards live under standards/react. The generator produces both harness mirrors and the self-contained
-plugins/react payload.
+## Ownership
 
-Concertable-specific frontend rules belong in Concertable/agents. Machine operations belong in
-tomjseery/base-agents. .NET contracts belong in tomjseery/dotagents.
+Full authored definitions live under `.agents/<kind>/<name>/SKILL.md`. The repository scope already means
+React and TypeScript, so there is no repeated `react/` source folder. `.codex/skills`, `.claude/skills`,
+marketplaces, the capability index, and `plugins/react` are generated from those definitions and authored host
+manifests. See [SOURCE_LAYOUT.md](SOURCE_LAYOUT.md).
 
-## Authoring
+## Applicability
 
-The open skill-kind taxonomy is defined in
-[`base-agents/SKILL_KINDS.md`](https://github.com/tomjseery/base-agents/blob/main/SKILL_KINDS.md).
-Every skill here declares `kind: contract` and routes to exactly one standards document. After a change run:
+The `core` profile contains only contract naming, React structure, and TypeScript style. TanStack Query, Router,
+and Table; Zustand; Tailwind and component primitives; axios; zod; dayjs; testing; the selected full stack; and
+multi-app sharing are independent profiles. Installing the plugin makes every capability discoverable; a repository
+selects only the profiles matching its actual libraries and shape.
 
-    pwsh .agents/sync-generated.ps1
-    pwsh .agents/sync-generated.ps1 -Check
+Product-specific frontend rules remain with their product owner. Machine and engineering workflow capabilities
+remain in `tomjseery/base-agents`. .NET guidance remains in `tomjseery/dotagents`.
 
-The generator rejects missing kinds, missing documents, orphan documents, manifest drift, and any plugin
-payload that would reference files outside its own subtree.
+## Authoring and verification
 
-## Installation
+Each definition declares `kind`, `domain`, `profile`, `applicability`, `requires`, and `provenance`. After an
+authored change run:
 
-The central Concertable provisioner installs react@react-agents for both harnesses:
+```powershell
+pwsh .agents/sync-generated.ps1
+pwsh .agents/sync-generated.ps1 -Check
+python -B -m unittest discover -s .agents/tests -p "test_*.py"
+```
 
-    pwsh path\to\agents\scripts\provision-agents.ps1
-
-A running session retains the payload loaded at startup; restart it after an update.
+The generator rejects source-map drift, unsafe output roots, duplicate identities, unresolved local skill
+references, missing selection metadata, product-owner leakage, and inconsistent host manifests.

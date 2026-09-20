@@ -1,0 +1,17 @@
+{
+  "name": "react",
+  "displayName": "React Standards",
+  "description": "Generic React and TypeScript engineering standards.",
+  "author": {
+    "name": "Tommy Seery"
+  },
+  "repository": "https://github.com/tomjseery/react-agents",
+  "skills": "./skills/",
+  "keywords": [
+    "standards",
+    "typescript",
+    "react",
+    "state",
+    "zod"
+  ]
+}

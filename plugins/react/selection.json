@@ -1,0 +1,261 @@
+{
+  "plugin": "react",
+  "profiles": {
+    "core": [
+      "contract-naming",
+      "react-structure",
+      "typescript-style"
+    ],
+    "client-state": [
+      "client-state"
+    ],
+    "data-tables": [
+      "data-tables"
+    ],
+    "dates": [
+      "date-formatting"
+    ],
+    "testing": [
+      "frontend-testing"
+    ],
+    "http": [
+      "http-layer"
+    ],
+    "routing": [
+      "routing"
+    ],
+    "server-state": [
+      "server-state"
+    ],
+    "selected-stack": [
+      "stack-defaults"
+    ],
+    "app-tiers": [
+      "tiered-shared-code"
+    ],
+    "ui": [
+      "ui-components"
+    ],
+    "validation": [
+      "write-boundary"
+    ]
+  },
+  "skills": [
+    {
+      "name": "client-state",
+      "kind": "contract",
+      "profile": "client-state",
+      "applicability": [
+        "React features with shared client state"
+      ],
+      "requires": [
+        "zustand"
+      ],
+      "provenance": [
+        "framework",
+        "selected-library"
+      ]
+    },
+    {
+      "name": "contract-naming",
+      "kind": "contract",
+      "profile": "core",
+      "applicability": [
+        "TypeScript clients with hand-written HTTP contracts"
+      ],
+      "requires": [
+        "typescript"
+      ],
+      "provenance": [
+        "language",
+        "http-contracts",
+        "house"
+      ]
+    },
+    {
+      "name": "data-tables",
+      "kind": "contract",
+      "profile": "data-tables",
+      "applicability": [
+        "React features rendering interactive data tables"
+      ],
+      "requires": [
+        "tanstack-table"
+      ],
+      "provenance": [
+        "framework",
+        "selected-library"
+      ]
+    },
+    {
+      "name": "date-formatting",
+      "kind": "contract",
+      "profile": "dates",
+      "applicability": [
+        "TypeScript applications formatting or comparing dates"
+      ],
+      "requires": [
+        "dayjs"
+      ],
+      "provenance": [
+        "language",
+        "selected-library"
+      ]
+    },
+    {
+      "name": "frontend-testing",
+      "kind": "contract",
+      "profile": "testing",
+      "applicability": [
+        "React repositories with an explicitly adopted frontend test suite"
+      ],
+      "requires": [
+        "adopted-frontend-tests"
+      ],
+      "provenance": [
+        "testing",
+        "framework"
+      ]
+    },
+    {
+      "name": "http-layer",
+      "kind": "contract",
+      "profile": "http",
+      "applicability": [
+        "React clients using the selected HTTP and server-state stack"
+      ],
+      "requires": [
+        "axios",
+        "tanstack-query"
+      ],
+      "provenance": [
+        "http",
+        "selected-library"
+      ]
+    },
+    {
+      "name": "react-structure",
+      "kind": "contract",
+      "profile": "core",
+      "applicability": [
+        "React applications"
+      ],
+      "requires": [
+        "react",
+        "typescript"
+      ],
+      "provenance": [
+        "framework",
+        "house"
+      ]
+    },
+    {
+      "name": "routing",
+      "kind": "contract",
+      "profile": "routing",
+      "applicability": [
+        "React applications using file-based TanStack Router"
+      ],
+      "requires": [
+        "tanstack-router"
+      ],
+      "provenance": [
+        "framework",
+        "selected-library"
+      ]
+    },
+    {
+      "name": "server-state",
+      "kind": "contract",
+      "profile": "server-state",
+      "applicability": [
+        "React applications using TanStack Query for server state"
+      ],
+      "requires": [
+        "tanstack-query"
+      ],
+      "provenance": [
+        "framework",
+        "selected-library"
+      ]
+    },
+    {
+      "name": "stack-defaults",
+      "kind": "contract",
+      "profile": "selected-stack",
+      "applicability": [
+        "Repositories choosing Tommy's complete React library stack"
+      ],
+      "requires": [
+        "selected-library-stack"
+      ],
+      "provenance": [
+        "selected-stack",
+        "house"
+      ]
+    },
+    {
+      "name": "tiered-shared-code",
+      "kind": "contract",
+      "profile": "app-tiers",
+      "applicability": [
+        "Repositories that share code across multiple applications"
+      ],
+      "requires": [
+        "multi-app-repository"
+      ],
+      "provenance": [
+        "architecture",
+        "house"
+      ]
+    },
+    {
+      "name": "typescript-style",
+      "kind": "contract",
+      "profile": "core",
+      "applicability": [
+        "TypeScript code"
+      ],
+      "requires": [
+        "typescript"
+      ],
+      "provenance": [
+        "language",
+        "house"
+      ]
+    },
+    {
+      "name": "ui-components",
+      "kind": "contract",
+      "profile": "ui",
+      "applicability": [
+        "React applications using the selected component and styling stack"
+      ],
+      "requires": [
+        "tailwind",
+        "cva",
+        "radix-or-shadcn"
+      ],
+      "provenance": [
+        "ui",
+        "selected-library"
+      ]
+    },
+    {
+      "name": "write-boundary",
+      "kind": "contract",
+      "profile": "validation",
+      "applicability": [
+        "React forms that accept user-editable input"
+      ],
+      "requires": [
+        "zod",
+        "user-editable-forms"
+      ],
+      "provenance": [
+        "validation",
+        "selected-library"
+      ]
+    }
+  ]
+}

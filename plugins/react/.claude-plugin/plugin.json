@@ -7,5 +7,11 @@
   },
   "repository": "https://github.com/tomjseery/react-agents",
   "skills": "./skills/",
-  "keywords": ["standards", "typescript", "react", "state", "zod"]
+  "keywords": [
+    "standards",
+    "typescript",
+    "react",
+    "state",
+    "zod"
+  ]
 }
