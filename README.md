@@ -1,6 +1,7 @@
-# react-agents
+# react
 
 Generic React and TypeScript guidance for Claude Code and Codex, published as `react@react-agents`.
+The canonical repository is [`tj-agents/react`](https://github.com/tj-agents/react); the marketplace ID remains `react-agents`.
 
 ## Ownership
 
@@ -17,7 +18,7 @@ multi-app sharing are independent profiles. Installing the plugin makes every ca
 selects only the profiles matching its actual libraries and shape.
 
 Product-specific frontend rules remain with their product owner. Machine and engineering workflow capabilities
-remain in `tomjseery/base-agents`. .NET guidance remains in `tomjseery/dotagents`.
+remain in `tj-agents/core`. .NET guidance remains in `tj-agents/dotnet`.
 
 ## Authoring and verification
 

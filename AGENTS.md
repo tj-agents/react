@@ -1,4 +1,4 @@
-# react-agents
+# react
 
 Read `README.md` and `SOURCE_LAYOUT.md` before changing repository structure.
 
