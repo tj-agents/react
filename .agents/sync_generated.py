@@ -30,6 +30,7 @@ EXPECTED_MARKETPLACE_TEMPLATES = {
     "claude": ".agents/plugins/manifests/claude/marketplace.json",
 }
 EXPECTED_MARKETPLACE_OUTPUTS = {"codex": ".agents/plugins/marketplace.json", "claude": ".claude-plugin/marketplace.json"}
+TIER_DECLARATION = ".agents/plugins/tier.json"
 
 
 def read(path: Path) -> str:
@@ -113,6 +114,19 @@ def validated_config(config: dict) -> None:
         raise ValueError("Package outputs must remain rooted at plugins/react")
 
 
+def validate_tier(root: Path) -> None:
+    declaration = load(root / TIER_DECLARATION)
+    if declaration.get("schema_version") != 1:
+        raise ValueError("The tier declaration must stay at schema_version 1")
+    if declaration.get("tier") != "react" or declaration.get("applies") != "stack-present":
+        raise ValueError("react is a stack tier and must declare itself as one")
+    if "tj-agents/react" not in (declaration.get("owner_repository") or []):
+        raise ValueError("The tier declaration must name this repository as its owner")
+    detect = declaration.get("detect") or {}
+    if not any(detect.get(field) for field in ("files", "globs", "content")):
+        raise ValueError("A stack tier must declare at least one detectable marker")
+
+
 def validate_host_metadata(codex: dict, claude: dict, codex_marketplace: dict, claude_marketplace: dict) -> None:
     for field in ("name", "description", "author", "repository", "skills", "keywords"):
         if not codex.get(field) or codex.get(field) != claude.get(field):
@@ -170,6 +184,7 @@ def validate(root: Path, config: dict, payloads: dict, skills: dict[str, dict]) 
         for name in BARE_SKILL_REFERENCE.findall(skill["body"]):
             if name not in skills:
                 raise ValueError(f"{skill['name']}: missing bare skill reference {name}")
+    validate_tier(root)
     codex = load(root / EXPECTED_HOST_MANIFEST_ROOTS["codex"] / "react.json")
     claude = load(root / EXPECTED_HOST_MANIFEST_ROOTS["claude"] / "react.json")
     codex_marketplace = load(root / EXPECTED_MARKETPLACE_TEMPLATES["codex"])
@@ -218,6 +233,7 @@ def build(root: Path) -> tuple[dict[str, bytes], dict]:
         emit(f"plugins/react/skills/{skill['name']}/SKILL.md", skill["body"])
     for host, manifest_root in EXPECTED_HOST_MANIFEST_ROOTS.items():
         emit(f"plugins/react/.{host}-plugin/plugin.json", read(root / manifest_root / "react.json"))
+    emit("plugins/react/tier.json", read(root / TIER_DECLARATION))
     emit("plugins/react/INDEX.md", "\n".join(lines).replace("# react capabilities", "# react package capabilities"))
     selection = {
         "plugin": "react",
