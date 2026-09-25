@@ -8,11 +8,13 @@
       "react"
     ]
   },
+  "compatibilitySkillAliases": {
+    "react-structure": "structure"
+  },
   "profiles": {
     "core": [
       "contract-naming",
       "structure",
-      "react-structure",
       "typescript-style"
     ],
     "client-state": [

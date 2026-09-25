@@ -4,7 +4,6 @@
     "core": [
       "contract-naming",
       "structure",
-      "react-structure",
       "typescript-style"
     ],
     "client-state": [
@@ -40,6 +39,9 @@
     "validation": [
       "write-boundary"
     ]
+  },
+  "compatibilitySkillAliases": {
+    "react-structure": "structure"
   },
   "skills": [
     {

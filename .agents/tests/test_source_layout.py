@@ -26,7 +26,7 @@ class SourceLayoutTests(unittest.TestCase):
 
     def test_core_does_not_select_optional_libraries_or_app_tiers(self) -> None:
         profiles = self.payloads["profiles"]
-        self.assertEqual(["contract-naming", "structure", "react-structure", "typescript-style"], profiles["core"])
+        self.assertEqual(["contract-naming", "structure", "typescript-style"], profiles["core"])
         optional = {
             "client-state", "data-tables", "date-formatting", "frontend-testing", "http-layer",
             "routing", "server-state", "stack-defaults", "tiered-shared-code", "ui-components", "write-boundary",
@@ -37,7 +37,8 @@ class SourceLayoutTests(unittest.TestCase):
             self.assertNotIn(forbidden, core_requires)
         assigned = [name for names in profiles.values() for name in names]
         self.assertEqual(len(assigned), len(set(assigned)))
-        self.assertEqual(set(self.skills), set(assigned))
+        self.assertEqual({"react-structure": "structure"}, self.payloads["compatibilitySkillAliases"])
+        self.assertEqual(set(self.skills), set(assigned) | set(self.payloads["compatibilitySkillAliases"]))
         self.assertIn("[react:structure](../structure/SKILL.md)", self.skills["react-structure"]["body"])
 
     def test_optional_profiles_name_their_prerequisites(self) -> None:
