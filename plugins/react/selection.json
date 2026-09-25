@@ -41,7 +41,10 @@
     ]
   },
   "compatibilitySkillAliases": {
-    "react-structure": "structure"
+    "react-structure": {
+      "replacedBy": "react:structure",
+      "removeAfter": "2027-03-31"
+    }
   },
   "skills": [
     {
