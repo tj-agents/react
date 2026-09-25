@@ -1,6 +1,9 @@
 # react
 
 Generic React and TypeScript guidance for Claude Code and Codex, published as `react@react-agents`.
+
+Use `react:structure` for React code organization. The previously published
+`react:react-structure` remains as a forwarding compatibility skill through 2027-03-31.
 The canonical repository is [`tj-agents/react`](https://github.com/tj-agents/react); the marketplace ID remains `react-agents`.
 
 ## Ownership

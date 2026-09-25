@@ -3,6 +3,7 @@
   "profiles": {
     "core": [
       "contract-naming",
+      "structure",
       "react-structure",
       "typescript-style"
     ],
@@ -191,6 +192,22 @@
       ],
       "provenance": [
         "selected-stack",
+        "house"
+      ]
+    },
+    {
+      "name": "structure",
+      "kind": "contract",
+      "profile": "core",
+      "applicability": [
+        "React applications"
+      ],
+      "requires": [
+        "react",
+        "typescript"
+      ],
+      "provenance": [
+        "framework",
         "house"
       ]
     },

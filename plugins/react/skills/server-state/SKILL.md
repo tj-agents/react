@@ -14,7 +14,7 @@ provenance: framework, selected-library
 ## React Query owns all server state
 
 Every server **read** is a `useQuery` and every server **write** is a `useMutation`, wrapped in a per-feature hook
-(naming in the `react:react-structure` skill). **Never call an api module from a `useEffect`, and never hand-roll
+(naming in the `react:structure` skill). **Never call an api module from a `useEffect`, and never hand-roll
 `useState` + `useEffect` + a promise to load or send server data.**
 
 React Query already owns caching, request **dedup** (including a strict-mode dev double-mount), retries,
