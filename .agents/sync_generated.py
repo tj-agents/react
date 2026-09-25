@@ -165,18 +165,24 @@ def validate(root: Path, config: dict, payloads: dict, skills: dict[str, dict]) 
     if payloads.get("publicPlugins") != ["react"] or payloads.get("payloads") != {"react": ["react"]}:
         raise ValueError("The public react package declaration changed")
     profiles = payloads.get("profiles", {})
+    aliases = payloads.get("compatibilitySkillAliases", {})
+    if not isinstance(aliases, dict):
+        raise ValueError("Compatibility skill aliases must be a mapping")
     assigned: list[str] = []
     for profile, names in profiles.items():
         if not NAME.fullmatch(profile) or len(names) != len(set(names)):
             raise ValueError(f"Invalid profile: {profile}")
         assigned.extend(names)
-    if len(assigned) != len(set(assigned)) or set(assigned) != set(skills):
-        raise ValueError("Every skill must belong to exactly one selection profile")
-    if profiles.get("core") != ["contract-naming", "structure", "react-structure", "typescript-style"]:
+    if len(assigned) != len(set(assigned)) or set(assigned) & set(aliases) or set(assigned) | set(aliases) != set(skills):
+        raise ValueError("Every skill must be selected once or declared as a compatibility alias")
+    for alias, target in aliases.items():
+        if target not in assigned or skills[alias]["metadata"]["profile"] != skills[target]["metadata"]["profile"]:
+            raise ValueError(f"Invalid compatibility skill alias: {alias} -> {target}")
+    if profiles.get("core") != ["contract-naming", "structure", "typescript-style"]:
         raise ValueError("The React and TypeScript core profile changed")
     for skill in skills.values():
         values = skill["metadata"]
-        if skill["name"] not in profiles.get(values["profile"], []):
+        if skill["name"] not in aliases and skill["name"] not in profiles.get(values["profile"], []):
             raise ValueError(f"{skill['name']}: profile metadata disagrees with payloads")
         for namespace, name in QUALIFIED_SKILL.findall(skill["body"]):
             if namespace == "react" and name not in skills:
@@ -238,6 +244,7 @@ def build(root: Path) -> tuple[dict[str, bytes], dict]:
     selection = {
         "plugin": "react",
         "profiles": payloads["profiles"],
+        "compatibilitySkillAliases": payloads["compatibilitySkillAliases"],
         "skills": [
             {
                 "name": skill["name"],
