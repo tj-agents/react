@@ -37,7 +37,7 @@ class SourceLayoutTests(unittest.TestCase):
             self.assertNotIn(forbidden, core_requires)
         assigned = [name for names in profiles.values() for name in names]
         self.assertEqual(len(assigned), len(set(assigned)))
-        self.assertEqual({"react-structure": "structure"}, self.payloads["compatibilitySkillAliases"])
+        self.assertEqual({"react-structure": {"replacedBy": "react:structure", "removeAfter": "2027-03-31"}}, self.payloads["compatibilitySkillAliases"])
         self.assertEqual(set(self.skills), set(assigned) | set(self.payloads["compatibilitySkillAliases"]))
         self.assertIn("[react:structure](../structure/SKILL.md)", self.skills["react-structure"]["body"])
 
