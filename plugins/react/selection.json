@@ -3,7 +3,7 @@
   "profiles": {
     "core": [
       "contract-naming",
-      "react-structure",
+      "structure",
       "typescript-style"
     ],
     "client-state": [
@@ -39,6 +39,12 @@
     "validation": [
       "write-boundary"
     ]
+  },
+  "compatibilitySkillAliases": {
+    "react-structure": {
+      "replacedBy": "react:structure",
+      "removeAfter": "2027-03-31"
+    }
   },
   "skills": [
     {
@@ -191,6 +197,22 @@
       ],
       "provenance": [
         "selected-stack",
+        "house"
+      ]
+    },
+    {
+      "name": "structure",
+      "kind": "contract",
+      "profile": "core",
+      "applicability": [
+        "React applications"
+      ],
+      "requires": [
+        "react",
+        "typescript"
+      ],
+      "provenance": [
+        "framework",
         "house"
       ]
     },

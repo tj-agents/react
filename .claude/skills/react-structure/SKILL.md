@@ -1,6 +1,6 @@
 ---
 name: react-structure
-description: How React code is organized — feature slices with explicit owners, hooks for reusable stateful orchestration and external integration, components that handle immediate UI events and render, Effects reserved for synchronization outside React, derived values computed during render, and closed-key behavior dispatched through one exhaustive table. Use when adding a feature folder, deciding whether logic belongs in a component or hook, reaching for useEffect, or writing a second branch on the same discriminator.
+description: Compatibility name for react:structure; remove after 2027-03-31. Use the shorter canonical name for new references.
 kind: contract
 domain: react
 profile: core
@@ -9,7 +9,7 @@ requires: react, typescript
 provenance: framework, house
 ---
 
-# React structure
+# React structure compatibility
 
 Read and follow the [canonical shared definition](../../../.agents/contract/react-structure/SKILL.md) in full.
 This discovery entry is generated; edit the referenced `.agents/` definition.
