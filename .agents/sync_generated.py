@@ -172,7 +172,7 @@ def validate(root: Path, config: dict, payloads: dict, skills: dict[str, dict]) 
         assigned.extend(names)
     if len(assigned) != len(set(assigned)) or set(assigned) != set(skills):
         raise ValueError("Every skill must belong to exactly one selection profile")
-    if profiles.get("core") != ["contract-naming", "react-structure", "typescript-style"]:
+    if profiles.get("core") != ["contract-naming", "structure", "react-structure", "typescript-style"]:
         raise ValueError("The React and TypeScript core profile changed")
     for skill in skills.values():
         values = skill["metadata"]

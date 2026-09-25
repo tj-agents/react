@@ -11,6 +11,7 @@
   "profiles": {
     "core": [
       "contract-naming",
+      "structure",
       "react-structure",
       "typescript-style"
     ],
