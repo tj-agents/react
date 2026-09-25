@@ -12,6 +12,7 @@ Generated from canonical `.agents/<kind>/<name>/` definitions.
 - `routing` — contract — routing — `.agents/contract/routing/SKILL.md`
 - `server-state` — contract — server-state — `.agents/contract/server-state/SKILL.md`
 - `stack-defaults` — contract — selected-stack — `.agents/contract/stack-defaults/SKILL.md`
+- `structure` — contract — core — `.agents/contract/structure/SKILL.md`
 - `tiered-shared-code` — contract — app-tiers — `.agents/contract/tiered-shared-code/SKILL.md`
 - `typescript-style` — contract — core — `.agents/contract/typescript-style/SKILL.md`
 - `ui-components` — contract — ui — `.agents/contract/ui-components/SKILL.md`

@@ -65,7 +65,7 @@ export type Price = FixedPrice | TieredPrice | UsagePrice;
 
 Narrow with `switch (x.$type)`, and key dispatch tables off `Record<X["$type"], …>`. **Add a `never`
 exhaustiveness arm so a new server subtype breaks the build rather than the runtime.** Dispatch belongs in
-one table, not a switch repeated across components — see the `react:react-structure` skill.
+one table, not a switch repeated across components — see the `react:structure` skill.
 
 **Pick exactly one discriminant.** A union carrying two candidate keys, with guards narrowing on one while
 the wire polymorphism uses the other, is the violation.

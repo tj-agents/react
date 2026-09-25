@@ -19,14 +19,14 @@ class SourceLayoutTests(unittest.TestCase):
         cls.payloads = json.loads((ROOT / ".agents/plugins/payloads.json").read_text(encoding="utf-8"))
         cls.skills = sync_generated.discover(ROOT, cls.config)
 
-    def test_inventory_is_fourteen_contracts(self) -> None:
-        self.assertEqual(14, len(self.skills))
+    def test_inventory_is_fifteen_contracts(self) -> None:
+        self.assertEqual(15, len(self.skills))
         self.assertEqual({"contract"}, {skill["metadata"]["kind"] for skill in self.skills.values()})
         self.assertFalse((ROOT / ".agents/skills").exists())
 
     def test_core_does_not_select_optional_libraries_or_app_tiers(self) -> None:
         profiles = self.payloads["profiles"]
-        self.assertEqual(["contract-naming", "react-structure", "typescript-style"], profiles["core"])
+        self.assertEqual(["contract-naming", "structure", "typescript-style"], profiles["core"])
         optional = {
             "client-state", "data-tables", "date-formatting", "frontend-testing", "http-layer",
             "routing", "server-state", "stack-defaults", "tiered-shared-code", "ui-components", "write-boundary",
@@ -37,7 +37,9 @@ class SourceLayoutTests(unittest.TestCase):
             self.assertNotIn(forbidden, core_requires)
         assigned = [name for names in profiles.values() for name in names]
         self.assertEqual(len(assigned), len(set(assigned)))
-        self.assertEqual(set(self.skills), set(assigned))
+        self.assertEqual({"react-structure": {"replacedBy": "react:structure", "removeAfter": "2027-03-31"}}, self.payloads["compatibilitySkillAliases"])
+        self.assertEqual(set(self.skills), set(assigned) | set(self.payloads["compatibilitySkillAliases"]))
+        self.assertIn("[react:structure](../structure/SKILL.md)", self.skills["react-structure"]["body"])
 
     def test_optional_profiles_name_their_prerequisites(self) -> None:
         expected = {
@@ -76,10 +78,10 @@ class SourceLayoutTests(unittest.TestCase):
         self.assertEqual([], offenders)
 
     def test_bare_and_qualified_skill_references_resolve(self) -> None:
-        broken = dict(self.skills["react-structure"])
+        broken = dict(self.skills["structure"])
         broken["body"] = broken["body"] + "\nSee the `missing-capability` skill.\n"
         copied = dict(self.skills)
-        copied["react-structure"] = broken
+        copied["structure"] = broken
         with self.assertRaisesRegex(ValueError, "missing bare skill reference"):
             sync_generated.validate(ROOT, self.config, self.payloads, copied)
 

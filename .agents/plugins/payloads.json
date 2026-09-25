@@ -8,10 +8,16 @@
       "react"
     ]
   },
+  "compatibilitySkillAliases": {
+    "react-structure": {
+      "replacedBy": "react:structure",
+      "removeAfter": "2027-03-31"
+    }
+  },
   "profiles": {
     "core": [
       "contract-naming",
-      "react-structure",
+      "structure",
       "typescript-style"
     ],
     "client-state": [
