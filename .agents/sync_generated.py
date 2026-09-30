@@ -14,7 +14,7 @@ NAME = re.compile(r"^[a-z][a-z0-9-]*$")
 QUALIFIED_SKILL = re.compile(r"(?<![-/\w])(react|engineering):(?!:)([a-z][a-z0-9-]+)")
 BARE_SKILL_REFERENCE = re.compile(r"`([a-z][a-z0-9-]+)`\s+skill(?:'s)?")
 REQUIRED_METADATA = ("name", "description", "kind", "domain", "profile", "applicability", "requires", "provenance")
-RESERVED_AGENT_DIRS = {"plugins", "skills", "tests"}
+RESERVED_AGENT_DIRS = {"plugins", "skills", "tests", "tiers"}
 EXPECTED_GENERATED_ROOTS = (
     ".codex/skills",
     ".claude/skills",
