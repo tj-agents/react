@@ -30,7 +30,7 @@ EXPECTED_MARKETPLACE_TEMPLATES = {
     "claude": ".agents/plugins/manifests/claude/marketplace.json",
 }
 EXPECTED_MARKETPLACE_OUTPUTS = {"codex": ".agents/plugins/marketplace.json", "claude": ".claude-plugin/marketplace.json"}
-TIER_DECLARATION = ".agents/plugins/tier.json"
+TIER_DECLARATION = ".agents/tiers/react.json"
 
 
 def read(path: Path) -> str:
@@ -116,14 +116,14 @@ def validated_config(config: dict) -> None:
 
 def validate_tier(root: Path) -> None:
     declaration = load(root / TIER_DECLARATION)
-    if declaration.get("schema_version") != 1:
-        raise ValueError("The tier declaration must stay at schema_version 1")
+    if declaration.get("schema_version") not in (1, 2):
+        raise ValueError("The tier declaration must declare a known schema_version")
     if declaration.get("tier") != "react" or declaration.get("applies") != "stack-present":
         raise ValueError("react is a stack tier and must declare itself as one")
     if "tj-agents/react" not in (declaration.get("owner_repository") or []):
         raise ValueError("The tier declaration must name this repository as its owner")
     detect = declaration.get("detect") or {}
-    if not any(detect.get(field) for field in ("files", "globs", "content")):
+    if not any(detect.get(field) for field in ("files", "globs", "content", "remote")):
         raise ValueError("A stack tier must declare at least one detectable marker")
 
 
