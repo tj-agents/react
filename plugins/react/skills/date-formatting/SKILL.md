@@ -11,6 +11,8 @@ provenance: language, selected-library
 
 # Dates and times
 
+Owns dates and times — the dayjs formatting module, UTC conversion, and date arithmetic and comparison.
+
 dayjs, and **every format string lives in one formatting module**. The failure this prevents is mundane and
 constant: the same timestamp rendering three ways on one screen because three components each chose their
 own format.

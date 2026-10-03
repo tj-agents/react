@@ -2,19 +2,5 @@
   "name": "react-agents",
   "interface": {
     "displayName": "React Agent Standards"
-  },
-  "plugins": [
-    {
-      "name": "react",
-      "source": {
-        "source": "local",
-        "path": "./plugins/react"
-      },
-      "policy": {
-        "installation": "INSTALLED_BY_DEFAULT",
-        "authentication": "ON_INSTALL"
-      },
-      "category": "Productivity"
-    }
-  ]
+  }
 }

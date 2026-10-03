@@ -11,6 +11,9 @@ provenance: ui, selected-library
 
 # UI and styling
 
+Owns Tailwind styling and the component-primitive layer around it — class merging, variants, and copy-in
+primitives.
+
 Tailwind for appearance, copy-in primitives for behaviour, one library per cross-cutting UI job. The rule
 this file exists to hold: **there is exactly one way to express a variant, one place classes merge, and one
 owner for each primitive.**

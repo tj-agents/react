@@ -1,57 +1,37 @@
 {
-  "description": "Generic React and TypeScript guidance with an explicit framework core and independently selectable library and repository-shape profiles.",
-  "publicPlugins": [
-    "react"
-  ],
   "payloads": {
-    "react": [
-      "react"
-    ]
+    "react": ["react"]
   },
   "compatibilitySkillAliases": {
-    "react-structure": {
-      "replacedBy": "react:structure",
-      "removeAfter": "2027-03-31"
+    "react": {
+      "react-structure": {
+        "replacedBy": "react:structure",
+        "removeAfter": "2027-03-31"
+      },
+      "client-state": {
+        "replacedBy": "react:state-client",
+        "removeAfter": "2027-03-31"
+      },
+      "server-state": {
+        "replacedBy": "react:state-server",
+        "removeAfter": "2027-03-31"
+      },
+      "contract-naming": {
+        "replacedBy": "react:naming-contracts",
+        "removeAfter": "2027-03-31"
+      },
+      "typescript-style": {
+        "replacedBy": "react:style",
+        "removeAfter": "2027-03-31"
+      },
+      "frontend-testing": {
+        "replacedBy": "react:testing",
+        "removeAfter": "2027-03-31"
+      },
+      "stack-defaults": {
+        "replacedBy": "react:libraries",
+        "removeAfter": "2027-03-31"
+      }
     }
-  },
-  "profiles": {
-    "core": [
-      "contract-naming",
-      "structure",
-      "typescript-style"
-    ],
-    "client-state": [
-      "client-state"
-    ],
-    "data-tables": [
-      "data-tables"
-    ],
-    "dates": [
-      "date-formatting"
-    ],
-    "testing": [
-      "frontend-testing"
-    ],
-    "http": [
-      "http-layer"
-    ],
-    "routing": [
-      "routing"
-    ],
-    "server-state": [
-      "server-state"
-    ],
-    "selected-stack": [
-      "stack-defaults"
-    ],
-    "app-tiers": [
-      "tiered-shared-code"
-    ],
-    "ui": [
-      "ui-components"
-    ],
-    "validation": [
-      "write-boundary"
-    ]
   }
 }
