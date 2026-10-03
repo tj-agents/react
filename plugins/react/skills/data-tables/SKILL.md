@@ -11,6 +11,8 @@ provenance: framework, selected-library
 
 # Tables
 
+Owns how interactive data tables are built on TanStack Table behind one shared `DataTable` component.
+
 TanStack Table, behind one `DataTable` component. A feature supplies **columns and rows**; it never touches
 `useReactTable`, `flexRender`, or a row model.
 

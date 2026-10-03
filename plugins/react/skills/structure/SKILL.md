@@ -11,6 +11,9 @@ provenance: framework, house
 
 # React structure
 
+Owns how React code is organized into feature slices, the hook/component split, Effect usage, and closed-key
+dispatch.
+
 ## A feature is a slice
 
 Everything one domain exchanges and owns lives together under `features/<feature>/` — `types`, `api`,
@@ -51,7 +54,7 @@ Route by trigger:
 |---|---|
 | An event (click, open, submit) | an event handler |
 | Derived from existing state | computed in render |
-| Server data, read or write | the repository's selected data adapter (see the `react:server-state` skill when applicable) |
+| Server data, read or write | the repository's selected data adapter (see the `react:state-server` skill when applicable) |
 
 ## Dispatch on a closed key with one table
 
@@ -75,3 +78,7 @@ const render: Record<Price["$type"], (p: Price) => ReactNode> = {
   and the server enforces.
 - **Returning a label the caller must re-switch.** Resolve to the value, not an enum every consumer
   reinterprets.
+
+## File structure
+
+_Nothing yet._ Once agreed, this is the tree `react:scaffold` creates.

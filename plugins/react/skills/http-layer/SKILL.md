@@ -11,6 +11,9 @@ provenance: http, selected-library
 
 # HTTP layer
 
+Owns the client's HTTP layer — per-resource api objects, HTTP-client instances, and centralized error
+handling.
+
 ## One `xApi` object per resource
 
 `features/<feature>/api/xApi.ts` default-exports an object literal of `async` arrow methods that call the

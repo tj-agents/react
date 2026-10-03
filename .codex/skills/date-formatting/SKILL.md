@@ -11,5 +11,5 @@ provenance: language, selected-library
 
 # Dates and times
 
-Read and follow the [canonical shared definition](../../../.agents/contract/date-formatting/SKILL.md) in full.
+Read and follow the [canonical definition](../../../.agents/react/contract/date-formatting/SKILL.md) in full.
 This discovery entry is generated; edit the referenced `.agents/` definition.
