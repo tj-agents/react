@@ -38,8 +38,14 @@
     "scaffold": [
       "scaffold"
     ],
+    "selected-stack": [
+      "libraries-selected"
+    ],
     "server-state": [
       "state-server"
+    ],
+    "testing": [
+      "testing-frontend"
     ],
     "ui": [
       "ui-components"
@@ -70,11 +76,11 @@
       "removeAfter": "2027-03-31"
     },
     "frontend-testing": {
-      "replacedBy": "react:testing",
+      "replacedBy": "react:testing-frontend",
       "removeAfter": "2027-03-31"
     },
     "stack-defaults": {
-      "replacedBy": "react:libraries",
+      "replacedBy": "react:libraries-selected",
       "removeAfter": "2027-03-31"
     }
   },
@@ -199,7 +205,7 @@
     {
       "name": "frontend-testing",
       "kind": "contract",
-      "profile": "core",
+      "profile": "testing",
       "applicability": [
         "React repositories with an explicitly adopted frontend test suite"
       ],
@@ -259,6 +265,20 @@
       "name": "libraries",
       "kind": "contract",
       "profile": "core",
+      "applicability": [
+        "React projects"
+      ],
+      "requires": [
+        "react"
+      ],
+      "provenance": [
+        "house"
+      ]
+    },
+    {
+      "name": "libraries-selected",
+      "kind": "contract",
+      "profile": "selected-stack",
       "applicability": [
         "Repositories choosing Tommy's complete React library stack"
       ],
@@ -349,7 +369,7 @@
     {
       "name": "stack-defaults",
       "kind": "contract",
-      "profile": "core",
+      "profile": "selected-stack",
       "applicability": [
         "Repositories choosing Tommy's complete React library stack"
       ],
@@ -426,6 +446,20 @@
       "name": "testing",
       "kind": "contract",
       "profile": "core",
+      "applicability": [
+        "React projects"
+      ],
+      "requires": [
+        "react"
+      ],
+      "provenance": [
+        "house"
+      ]
+    },
+    {
+      "name": "testing-frontend",
+      "kind": "contract",
+      "profile": "testing",
       "applicability": [
         "React repositories with an explicitly adopted frontend test suite"
       ],

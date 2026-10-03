@@ -1,12 +1,12 @@
 ---
 name: testing
-description: Frontend test authorization and architecture — this skill never authorizes new tests; add them only when explicitly requested or repo-owned guidance adopts the tier. For adopted suites, it chooses Vitest Node, real-browser component, or end-to-end ownership and defines colocated files, Testing Library interactions, MSW boundaries, QueryClient isolation, vi.hoisted mocks, and coverage as a signal. Use when proposing, adding, changing, or reviewing frontend tests or test infrastructure.
+description: Frontend test authorization — tests are added only when explicitly requested or repo-owned guidance adopts a tier; this hub does not authorize or shape any suite by itself. See react:testing-frontend once a suite is adopted. Use when proposing, adding, changing, or reviewing frontend tests or test infrastructure.
 kind: contract
 domain: react
 profile: core
-applicability: React repositories with an explicitly adopted frontend test suite
-requires: adopted-frontend-tests
-provenance: testing, framework
+applicability: React projects
+requires: react
+provenance: house
 ---
 
 # Testing

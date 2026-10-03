@@ -1,9 +1,9 @@
 ---
 name: frontend-testing
-description: Compatibility name for react:testing; remove after 2027-03-31. Use the shorter canonical name for new references.
+description: Compatibility name for react:testing-frontend; remove after 2027-03-31. Use the shorter canonical name for new references.
 kind: contract
 domain: react
-profile: core
+profile: testing
 applicability: React repositories with an explicitly adopted frontend test suite
 requires: adopted-frontend-tests
 provenance: testing, framework
