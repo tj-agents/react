@@ -11,6 +11,9 @@ provenance: architecture, house
 
 # Tiered shared code
 
+Owns how code is shared across multiple apps built from one repository — tier placement, injected
+variation, and the typecheck boundary gate.
+
 Tiers nest — a universally shared package, then per-product packages, then per-app source — and the rule is
 the same at every level: **code belongs at the widest tier every consumer can legitimately run**, and
 variation is injected from the owning app, never resolved inside shared code with an identity check.
@@ -85,7 +88,7 @@ export interface TenantIdentity { user: User; memberships: Membership[]; }
 
 Because that product identity module holds stateful domain data — which tenant is active, what the
 memberships are — it is also the feature that owns that reactive state; the two patterns land on the same
-module (see `react:client-state`).
+module (see `react:state-client`).
 
 **The anti-patterns:**
 
@@ -95,4 +98,4 @@ module (see `react:client-state`).
   shared type lying about its shape. The typed product `/me` removes the cast: the field is typed where it
   is real.
 - **Two discriminants on one union** — narrowing on a role while the wire polymorphism keys on something
-  else. Pick one key (see `react:typescript-style`).
+  else. Pick one key (see `react:style`).

@@ -11,6 +11,9 @@ provenance: validation, selected-library
 
 # The write boundary
 
+Owns the client write boundary — form validation against zod, the parsed-to-request mapping, and inline
+validation messages.
+
 Every user-editable form validates its controlled-input buffer against a **zod** schema at submit and maps
 the **parsed** result — never the raw buffer — to the `XRequest`. A form with free-typed fields and no
 schema is the violation.

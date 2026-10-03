@@ -11,4 +11,5 @@ provenance: framework, house
 
 # React structure compatibility
 
-Read and follow [react:structure](../structure/SKILL.md) in full.
+Owns nothing; forwards to `react:structure`, kept for compatibility until 2027-03-31. Read and follow it in
+full.

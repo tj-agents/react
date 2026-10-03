@@ -11,6 +11,9 @@ provenance: framework, selected-library
 
 # Routing
 
+Owns file-based routing with TanStack Router — route wiring, access-control guards, search-param
+validation, and navigation.
+
 TanStack Router, file-based. The route tree is the file tree, so a route's URL is never declared in two
 places and never assembled from strings at a call site.
 

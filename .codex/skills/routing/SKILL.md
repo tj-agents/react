@@ -11,5 +11,5 @@ provenance: framework, selected-library
 
 # Routing
 
-Read and follow the [canonical shared definition](../../../.agents/contract/routing/SKILL.md) in full.
+Read and follow the [canonical definition](../../../.agents/react/contract/routing/SKILL.md) in full.
 This discovery entry is generated; edit the referenced `.agents/` definition.
