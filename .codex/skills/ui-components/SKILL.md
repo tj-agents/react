@@ -11,5 +11,5 @@ provenance: ui, selected-library
 
 # UI and styling
 
-Read and follow the [canonical shared definition](../../../.agents/contract/ui-components/SKILL.md) in full.
+Read and follow the [canonical definition](../../../.agents/react/contract/ui-components/SKILL.md) in full.
 This discovery entry is generated; edit the referenced `.agents/` definition.
