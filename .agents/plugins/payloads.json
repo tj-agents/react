@@ -25,11 +25,11 @@
         "removeAfter": "2027-03-31"
       },
       "frontend-testing": {
-        "replacedBy": "react:testing",
+        "replacedBy": "react:testing-frontend",
         "removeAfter": "2027-03-31"
       },
       "stack-defaults": {
-        "replacedBy": "react:libraries",
+        "replacedBy": "react:libraries-selected",
         "removeAfter": "2027-03-31"
       }
     }

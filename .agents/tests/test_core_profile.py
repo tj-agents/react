@@ -26,13 +26,24 @@ class ReactCoreProfileTests(unittest.TestCase):
             self.assertEqual("contract", self.skills[name]["kind"])
             self.assertEqual("core", self.skills[name]["metadata"]["profile"])
 
-    def test_core_does_not_select_optional_libraries_or_app_tiers(self) -> None:
-        core_names = [name for name, skill in self.skills.items() if skill["metadata"]["profile"] == "core"]
-        optional = {
-            "state-client", "data-tables", "date-formatting", "http-layer",
-            "routing", "state-server", "tiered-shared-code", "ui-components", "write-boundary",
+    def test_core_is_exactly_the_stack_free_contracts(self) -> None:
+        aliases = set(self.payloads["compatibilitySkillAliases"]["react"])
+        core_names = {
+            name for name, skill in self.skills.items()
+            if skill["metadata"]["profile"] == "core" and name not in aliases
         }
-        self.assertTrue(optional.isdisjoint(core_names))
+        self.assertEqual(
+            {
+                "naming-contracts", "structure", "style",
+                "domain-design", "errors", "build", "libraries", "testing",
+            },
+            core_names,
+        )
+        must_not_be_core = {
+            "state-client", "data-tables", "date-formatting", "http-layer", "routing", "state-server",
+            "tiered-shared-code", "ui-components", "write-boundary", "libraries-selected", "testing-frontend",
+        }
+        self.assertTrue(must_not_be_core.isdisjoint(core_names))
         core_requires = ", ".join(self.skills[name]["metadata"]["requires"] for name in core_names).lower()
         for forbidden in ("tanstack", "zustand", "tailwind", "axios", "dayjs", "zod", "multi-app"):
             self.assertNotIn(forbidden, core_requires)
@@ -47,6 +58,8 @@ class ReactCoreProfileTests(unittest.TestCase):
             "tiered-shared-code": "multi-app-repository",
             "ui-components": "tailwind",
             "write-boundary": "zod",
+            "libraries-selected": "selected-library-stack",
+            "testing-frontend": "adopted-frontend-tests",
         }
         for name, prerequisite in expected.items():
             self.assertIn(prerequisite, self.skills[name]["metadata"]["requires"])
@@ -59,8 +72,8 @@ class ReactCoreProfileTests(unittest.TestCase):
             "server-state": "state-server",
             "contract-naming": "naming-contracts",
             "typescript-style": "style",
-            "frontend-testing": "testing",
-            "stack-defaults": "libraries",
+            "frontend-testing": "testing-frontend",
+            "stack-defaults": "libraries-selected",
         }
         self.assertEqual(set(expected_targets), set(aliases))
         for alias, target in expected_targets.items():
