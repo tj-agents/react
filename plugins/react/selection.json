@@ -1,13 +1,22 @@
 {
   "plugin": "react",
+  "dependencies": [],
   "profiles": {
-    "core": [
-      "contract-naming",
-      "structure",
-      "typescript-style"
+    "app-tiers": [
+      "tiered-shared-code"
     ],
     "client-state": [
-      "client-state"
+      "state-client"
+    ],
+    "core": [
+      "build",
+      "domain-design",
+      "errors",
+      "libraries",
+      "naming-contracts",
+      "structure",
+      "style",
+      "testing"
     ],
     "data-tables": [
       "data-tables"
@@ -15,23 +24,22 @@
     "dates": [
       "date-formatting"
     ],
-    "testing": [
-      "frontend-testing"
-    ],
     "http": [
       "http-layer"
+    ],
+    "knowledge": [
+      "direction",
+      "knowledge",
+      "learning"
     ],
     "routing": [
       "routing"
     ],
+    "scaffold": [
+      "scaffold"
+    ],
     "server-state": [
-      "server-state"
-    ],
-    "selected-stack": [
-      "stack-defaults"
-    ],
-    "app-tiers": [
-      "tiered-shared-code"
+      "state-server"
     ],
     "ui": [
       "ui-components"
@@ -44,9 +52,47 @@
     "react-structure": {
       "replacedBy": "react:structure",
       "removeAfter": "2027-03-31"
+    },
+    "client-state": {
+      "replacedBy": "react:state-client",
+      "removeAfter": "2027-03-31"
+    },
+    "server-state": {
+      "replacedBy": "react:state-server",
+      "removeAfter": "2027-03-31"
+    },
+    "contract-naming": {
+      "replacedBy": "react:naming-contracts",
+      "removeAfter": "2027-03-31"
+    },
+    "typescript-style": {
+      "replacedBy": "react:style",
+      "removeAfter": "2027-03-31"
+    },
+    "frontend-testing": {
+      "replacedBy": "react:testing",
+      "removeAfter": "2027-03-31"
+    },
+    "stack-defaults": {
+      "replacedBy": "react:libraries",
+      "removeAfter": "2027-03-31"
     }
   },
   "skills": [
+    {
+      "name": "build",
+      "kind": "contract",
+      "profile": "core",
+      "applicability": [
+        "React projects"
+      ],
+      "requires": [
+        "react"
+      ],
+      "provenance": [
+        "house"
+      ]
+    },
     {
       "name": "client-state",
       "kind": "contract",
@@ -109,9 +155,51 @@
       ]
     },
     {
+      "name": "direction",
+      "kind": "knowledge",
+      "profile": "knowledge",
+      "applicability": [
+        "React learning"
+      ],
+      "requires": [
+        "react"
+      ],
+      "provenance": [
+        "house"
+      ]
+    },
+    {
+      "name": "domain-design",
+      "kind": "contract",
+      "profile": "core",
+      "applicability": [
+        "React projects"
+      ],
+      "requires": [
+        "react"
+      ],
+      "provenance": [
+        "house"
+      ]
+    },
+    {
+      "name": "errors",
+      "kind": "contract",
+      "profile": "core",
+      "applicability": [
+        "React projects"
+      ],
+      "requires": [
+        "react"
+      ],
+      "provenance": [
+        "house"
+      ]
+    },
+    {
       "name": "frontend-testing",
       "kind": "contract",
-      "profile": "testing",
+      "profile": "core",
       "applicability": [
         "React repositories with an explicitly adopted frontend test suite"
       ],
@@ -137,6 +225,65 @@
       "provenance": [
         "http",
         "selected-library"
+      ]
+    },
+    {
+      "name": "knowledge",
+      "kind": "knowledge",
+      "profile": "knowledge",
+      "applicability": [
+        "React learning"
+      ],
+      "requires": [
+        "react"
+      ],
+      "provenance": [
+        "house"
+      ]
+    },
+    {
+      "name": "learning",
+      "kind": "knowledge",
+      "profile": "knowledge",
+      "applicability": [
+        "React projects and learning"
+      ],
+      "requires": [
+        "react"
+      ],
+      "provenance": [
+        "house"
+      ]
+    },
+    {
+      "name": "libraries",
+      "kind": "contract",
+      "profile": "core",
+      "applicability": [
+        "Repositories choosing Tommy's complete React library stack"
+      ],
+      "requires": [
+        "selected-library-stack"
+      ],
+      "provenance": [
+        "selected-stack",
+        "house"
+      ]
+    },
+    {
+      "name": "naming-contracts",
+      "kind": "contract",
+      "profile": "core",
+      "applicability": [
+        "TypeScript clients with hand-written HTTP contracts"
+      ],
+      "requires": [
+        "typescript"
+      ],
+      "provenance": [
+        "language",
+        "http-contracts",
+        "house"
       ]
     },
     {
@@ -171,6 +318,20 @@
       ]
     },
     {
+      "name": "scaffold",
+      "kind": "utility",
+      "profile": "scaffold",
+      "applicability": [
+        "new React projects"
+      ],
+      "requires": [
+        "react"
+      ],
+      "provenance": [
+        "house"
+      ]
+    },
+    {
       "name": "server-state",
       "kind": "contract",
       "profile": "server-state",
@@ -188,7 +349,7 @@
     {
       "name": "stack-defaults",
       "kind": "contract",
-      "profile": "selected-stack",
+      "profile": "core",
       "applicability": [
         "Repositories choosing Tommy's complete React library stack"
       ],
@@ -198,6 +359,36 @@
       "provenance": [
         "selected-stack",
         "house"
+      ]
+    },
+    {
+      "name": "state-client",
+      "kind": "contract",
+      "profile": "client-state",
+      "applicability": [
+        "React features with shared client state"
+      ],
+      "requires": [
+        "zustand"
+      ],
+      "provenance": [
+        "framework",
+        "selected-library"
+      ]
+    },
+    {
+      "name": "state-server",
+      "kind": "contract",
+      "profile": "server-state",
+      "applicability": [
+        "React applications using TanStack Query for server state"
+      ],
+      "requires": [
+        "tanstack-query"
+      ],
+      "provenance": [
+        "framework",
+        "selected-library"
       ]
     },
     {
@@ -214,6 +405,36 @@
       "provenance": [
         "framework",
         "house"
+      ]
+    },
+    {
+      "name": "style",
+      "kind": "contract",
+      "profile": "core",
+      "applicability": [
+        "TypeScript code"
+      ],
+      "requires": [
+        "typescript"
+      ],
+      "provenance": [
+        "language",
+        "house"
+      ]
+    },
+    {
+      "name": "testing",
+      "kind": "contract",
+      "profile": "core",
+      "applicability": [
+        "React repositories with an explicitly adopted frontend test suite"
+      ],
+      "requires": [
+        "adopted-frontend-tests"
+      ],
+      "provenance": [
+        "testing",
+        "framework"
       ]
     },
     {

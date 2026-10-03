@@ -1,6 +1,6 @@
 ---
 name: typescript-style
-description: Generic TypeScript style for a hand-written client — `interface` for object shapes and `type` for unions, aliases and derived types, `extends` rather than intersections, camelCase fields matching the JSON wire key-for-key with no client-side case conversion (and the multipart form-field exception), defaulting an absent value to an optional field rather than a nullable one unless "deliberately emptied" is a distinct acted-on state, and modelling server polymorphism as a discriminated union on the wire discriminator with a `never` exhaustiveness arm. Use when declaring or reviewing a type, adding a field that may be absent, seeing a non-camelCase key on the wire, or modelling a payload that arrives in more than one shape.
+description: Compatibility name for react:style; remove after 2027-03-31. Use the shorter canonical name for new references.
 kind: contract
 domain: react
 profile: core
@@ -9,7 +9,7 @@ requires: typescript
 provenance: language, house
 ---
 
-# TypeScript style
+# TypeScript style compatibility
 
-Read and follow the [canonical shared definition](../../../.agents/contract/typescript-style/SKILL.md) in full.
+Read and follow the [canonical definition](../../../.agents/react/contract/typescript-style/SKILL.md) in full.
 This discovery entry is generated; edit the referenced `.agents/` definition.

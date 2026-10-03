@@ -1,6 +1,6 @@
 ---
 name: contract-naming
-description: Naming the client's half of an HTTP contract — reads take the plain domain noun with no `Dto` or `Response` suffix (those are the server's words and differentiate nothing on the client), writes take `XRequest` carrying only client-settable fields with identity coming from the route, a suffix survives only where it distinguishes two real shapes, and every feature's reads and requests live in one `types.ts` the api module imports. a read is consumed exactly as it arrives with no parallel view-model type and derived values computed where used, while narrowing a union member and building renderer-specific input at a call site are not view models; use when naming a type that mirrors a server payload, shaping a write body, deciding whether to keep a suffix, choosing where a contract type lives, or weighing generated clients against hand-written types.
+description: Compatibility name for react:naming-contracts; remove after 2027-03-31. Use the shorter canonical name for new references.
 kind: contract
 domain: react
 profile: core
@@ -9,7 +9,7 @@ requires: typescript
 provenance: language, http-contracts, house
 ---
 
-# Contract naming
+# Contract naming compatibility
 
-Read and follow the [canonical shared definition](../../../.agents/contract/contract-naming/SKILL.md) in full.
+Read and follow the [canonical definition](../../../.agents/react/contract/contract-naming/SKILL.md) in full.
 This discovery entry is generated; edit the referenced `.agents/` definition.

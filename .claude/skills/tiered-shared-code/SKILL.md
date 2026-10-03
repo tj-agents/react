@@ -11,5 +11,5 @@ provenance: architecture, house
 
 # Tiered shared code
 
-Read and follow the [canonical shared definition](../../../.agents/contract/tiered-shared-code/SKILL.md) in full.
+Read and follow the [canonical definition](../../../.agents/react/contract/tiered-shared-code/SKILL.md) in full.
 This discovery entry is generated; edit the referenced `.agents/` definition.

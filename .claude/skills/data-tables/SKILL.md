@@ -11,5 +11,5 @@ provenance: framework, selected-library
 
 # Tables
 
-Read and follow the [canonical shared definition](../../../.agents/contract/data-tables/SKILL.md) in full.
+Read and follow the [canonical definition](../../../.agents/react/contract/data-tables/SKILL.md) in full.
 This discovery entry is generated; edit the referenced `.agents/` definition.
