@@ -4,8 +4,7 @@
   "stack": "TypeScript/React",
   "applies": "stack-present",
   "owner_repository": [
-    "tj-agents/react",
-    "tomjseery/react-agents"
+    "tj-agents/react"
   ],
   "detect": {
     "files": [
