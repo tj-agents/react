@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "plugin": "react-agents/react",
+  "source_roots": [
+    ".agents/react"
+  ],
+  "requires": {
+    "marketplaces": [
+      {
+        "id": "react-agents",
+        "repository": "tj-agents/react"
+      }
+    ],
+    "plugins": [
+      "react-agents/react"
+    ],
+    "hooks": [],
+    "permissions": {
+      "claude_allow": [],
+      "codex_prefix_rules": []
+    }
+  }
+}
