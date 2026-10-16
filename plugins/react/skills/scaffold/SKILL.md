@@ -11,17 +11,5 @@ provenance: house
 
 # React project scaffold
 
-Creates a project in the File structure `react:structure` records. Its scripts and templates sit beside
-this file.
-
-## Create a project
-
-_Nothing yet._ Build the scaffold once `react:structure` has an agreed File structure.
-
-## Build and adapt
-
-_Nothing yet._
-
-## Validation and publication
-
-_Nothing yet._
+Read and follow the [canonical definition](../../.agents/react/utility/scaffold/SKILL.md) in full.
+This discovery entry is generated; edit the referenced `.agents/` definition.

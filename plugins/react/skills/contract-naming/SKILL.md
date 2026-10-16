@@ -11,5 +11,5 @@ provenance: language, http-contracts, house
 
 # Contract naming compatibility
 
-Owns nothing; forwards to `react:naming-contracts`, kept for compatibility until 2027-03-31. Read and follow
-it in full.
+Read and follow the [canonical definition](../../.agents/react/contract/contract-naming/SKILL.md) in full.
+This discovery entry is generated; edit the referenced `.agents/` definition.

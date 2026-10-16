@@ -11,5 +11,5 @@ provenance: framework, house
 
 # React structure compatibility
 
-Owns nothing; forwards to `react:structure`, kept for compatibility until 2027-03-31. Read and follow it in
-full.
+Read and follow the [canonical definition](../../.agents/react/contract/react-structure/SKILL.md) in full.
+This discovery entry is generated; edit the referenced `.agents/` definition.

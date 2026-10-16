@@ -11,8 +11,5 @@ provenance: house
 
 # React domain design
 
-Owns how domain values, entities, state transitions and shared behaviour are modelled.
-
-## Agreed
-
-_Nothing yet._ Propose a rule through `react:learning`'s convention procedure.
+Read and follow the [canonical definition](../../.agents/react/contract/domain-design/SKILL.md) in full.
+This discovery entry is generated; edit the referenced `.agents/` definition.
