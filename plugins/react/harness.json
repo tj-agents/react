@@ -9,10 +9,17 @@
       {
         "id": "react-agents",
         "repository": "tj-agents/react"
+      },
+      {
+        "id": "tj-agents",
+        "repository": "tj-agents/marketplace"
       }
     ],
     "plugins": [
-      "react-agents/react"
+      "react-agents/react",
+      "tj-agents/base",
+      "tj-agents/engineering",
+      "tj-agents/machine"
     ],
     "hooks": [],
     "permissions": {

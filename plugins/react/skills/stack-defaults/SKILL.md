@@ -11,5 +11,5 @@ provenance: selected-stack, house
 
 # Stack defaults compatibility
 
-Owns nothing; forwards to `react:libraries-selected`, kept for compatibility until 2027-03-31. Read and
-follow it in full.
+Read and follow the [canonical definition](../../.agents/react/contract/stack-defaults/SKILL.md) in full.
+This discovery entry is generated; edit the referenced `.agents/` definition.

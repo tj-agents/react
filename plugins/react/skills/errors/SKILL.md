@@ -11,8 +11,5 @@ provenance: house
 
 # React errors
 
-Owns error types, how errors propagate, and what may fail fast.
-
-## Agreed
-
-_Nothing yet._ Propose a rule through `react:learning`'s convention procedure.
+Read and follow the [canonical definition](../../.agents/react/contract/errors/SKILL.md) in full.
+This discovery entry is generated; edit the referenced `.agents/` definition.
