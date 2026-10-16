@@ -18,5 +18,8 @@
         "zod"
       ]
     }
+  ],
+  "allowCrossMarketplaceDependenciesOn": [
+    "tj-agents"
   ]
 }

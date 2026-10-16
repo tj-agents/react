@@ -11,8 +11,5 @@ provenance: house
 
 # React build
 
-Owns the toolchain pin, build configuration, the verification gate and CI.
-
-## Agreed
-
-_Nothing yet._ Propose a rule through `react:learning`'s convention procedure.
+Read and follow the [canonical definition](../../.agents/react/contract/build/SKILL.md) in full.
+This discovery entry is generated; edit the referenced `.agents/` definition.

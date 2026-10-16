@@ -11,5 +11,5 @@ provenance: testing, framework
 
 # Testing compatibility
 
-Owns nothing; forwards to `react:testing-frontend`, kept for compatibility until 2027-03-31. Read and follow
-it in full.
+Read and follow the [canonical definition](../../.agents/react/contract/frontend-testing/SKILL.md) in full.
+This discovery entry is generated; edit the referenced `.agents/` definition.
