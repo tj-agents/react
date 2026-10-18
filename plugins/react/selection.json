@@ -58,36 +58,7 @@
       "write-boundary"
     ]
   },
-  "compatibilitySkillAliases": {
-    "react-structure": {
-      "replacedBy": "react:structure",
-      "removeAfter": "2027-03-31"
-    },
-    "client-state": {
-      "replacedBy": "react:state-client",
-      "removeAfter": "2027-03-31"
-    },
-    "server-state": {
-      "replacedBy": "react:state-server",
-      "removeAfter": "2027-03-31"
-    },
-    "contract-naming": {
-      "replacedBy": "react:naming-contracts",
-      "removeAfter": "2027-03-31"
-    },
-    "typescript-style": {
-      "replacedBy": "react:style",
-      "removeAfter": "2027-03-31"
-    },
-    "frontend-testing": {
-      "replacedBy": "react:testing-frontend",
-      "removeAfter": "2027-03-31"
-    },
-    "stack-defaults": {
-      "replacedBy": "react:libraries-selected",
-      "removeAfter": "2027-03-31"
-    }
-  },
+  "compatibilitySkillAliases": {},
   "skills": [
     {
       "name": "build",
@@ -100,37 +71,6 @@
         "react"
       ],
       "provenance": [
-        "house"
-      ]
-    },
-    {
-      "name": "client-state",
-      "kind": "contract",
-      "profile": "client-state",
-      "applicability": [
-        "React features with shared client state"
-      ],
-      "requires": [
-        "zustand"
-      ],
-      "provenance": [
-        "framework",
-        "selected-library"
-      ]
-    },
-    {
-      "name": "contract-naming",
-      "kind": "contract",
-      "profile": "core",
-      "applicability": [
-        "TypeScript clients with hand-written HTTP contracts"
-      ],
-      "requires": [
-        "typescript"
-      ],
-      "provenance": [
-        "language",
-        "http-contracts",
         "house"
       ]
     },
@@ -204,21 +144,6 @@
       ],
       "provenance": [
         "house"
-      ]
-    },
-    {
-      "name": "frontend-testing",
-      "kind": "contract",
-      "profile": "testing",
-      "applicability": [
-        "React repositories with an explicitly adopted frontend test suite"
-      ],
-      "requires": [
-        "adopted-frontend-tests"
-      ],
-      "provenance": [
-        "testing",
-        "framework"
       ]
     },
     {
@@ -311,22 +236,6 @@
       ]
     },
     {
-      "name": "react-structure",
-      "kind": "contract",
-      "profile": "core",
-      "applicability": [
-        "React applications"
-      ],
-      "requires": [
-        "react",
-        "typescript"
-      ],
-      "provenance": [
-        "framework",
-        "house"
-      ]
-    },
-    {
       "name": "routing",
       "kind": "contract",
       "profile": "routing",
@@ -352,36 +261,6 @@
         "react"
       ],
       "provenance": [
-        "house"
-      ]
-    },
-    {
-      "name": "server-state",
-      "kind": "contract",
-      "profile": "server-state",
-      "applicability": [
-        "React applications using TanStack Query for server state"
-      ],
-      "requires": [
-        "tanstack-query"
-      ],
-      "provenance": [
-        "framework",
-        "selected-library"
-      ]
-    },
-    {
-      "name": "stack-defaults",
-      "kind": "contract",
-      "profile": "selected-stack",
-      "applicability": [
-        "Repositories choosing Tommy's complete React library stack"
-      ],
-      "requires": [
-        "selected-library-stack"
-      ],
-      "provenance": [
-        "selected-stack",
         "house"
       ]
     },
@@ -487,21 +366,6 @@
       ],
       "provenance": [
         "architecture",
-        "house"
-      ]
-    },
-    {
-      "name": "typescript-style",
-      "kind": "contract",
-      "profile": "core",
-      "applicability": [
-        "TypeScript code"
-      ],
-      "requires": [
-        "typescript"
-      ],
-      "provenance": [
-        "language",
         "house"
       ]
     },

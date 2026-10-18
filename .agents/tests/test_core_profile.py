@@ -27,10 +27,9 @@ class ReactCoreProfileTests(unittest.TestCase):
             self.assertEqual("core", self.skills[name]["metadata"]["profile"])
 
     def test_core_is_exactly_the_stack_free_contracts(self) -> None:
-        aliases = set(self.payloads["compatibilitySkillAliases"]["react"])
         core_names = {
             name for name, skill in self.skills.items()
-            if skill["metadata"]["profile"] == "core" and name not in aliases
+            if skill["metadata"]["profile"] == "core"
         }
         self.assertEqual(
             {
@@ -64,25 +63,13 @@ class ReactCoreProfileTests(unittest.TestCase):
         for name, prerequisite in expected.items():
             self.assertIn(prerequisite, self.skills[name]["metadata"]["requires"])
 
-    def test_compatibility_aliases_forward_to_a_same_profile_sibling(self) -> None:
-        aliases = self.payloads["compatibilitySkillAliases"]["react"]
-        expected_targets = {
-            "react-structure": "structure",
-            "client-state": "state-client",
-            "server-state": "state-server",
-            "contract-naming": "naming-contracts",
-            "typescript-style": "style",
-            "frontend-testing": "testing-frontend",
-            "stack-defaults": "libraries-selected",
+    def test_retired_skill_names_are_absent(self) -> None:
+        retired = {
+            "react-structure", "client-state", "server-state", "contract-naming",
+            "typescript-style", "frontend-testing", "stack-defaults",
         }
-        self.assertEqual(set(expected_targets), set(aliases))
-        for alias, target in expected_targets.items():
-            self.assertEqual(f"react:{target}", aliases[alias]["replacedBy"])
-            self.assertEqual("2027-03-31", aliases[alias]["removeAfter"])
-            self.assertEqual(
-                self.skills[target]["metadata"]["profile"],
-                self.skills[alias]["metadata"]["profile"],
-            )
+        self.assertTrue(retired.isdisjoint(self.skills))
+        self.assertFalse(self.payloads.get("compatibilitySkillAliases"))
 
     def test_structure_declares_its_file_structure_section(self) -> None:
         body = self.skills["structure"]["body"]
