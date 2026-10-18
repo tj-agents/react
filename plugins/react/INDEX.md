@@ -1,21 +1,15 @@
 # react package capabilities
 
 - `build` — contract — core
-- `client-state` — contract — client-state
-- `contract-naming` — contract — core
 - `data-tables` — contract — data-tables
 - `date-formatting` — contract — dates
 - `domain-design` — contract — core
 - `errors` — contract — core
-- `frontend-testing` — contract — testing
 - `http-layer` — contract — http
 - `libraries` — contract — core
 - `libraries-selected` — contract — selected-stack
 - `naming-contracts` — contract — core
-- `react-structure` — contract — core
 - `routing` — contract — routing
-- `server-state` — contract — server-state
-- `stack-defaults` — contract — selected-stack
 - `state-client` — contract — client-state
 - `state-server` — contract — server-state
 - `structure` — contract — core
@@ -23,7 +17,6 @@
 - `testing` — contract — core
 - `testing-frontend` — contract — testing
 - `tiered-shared-code` — contract — app-tiers
-- `typescript-style` — contract — core
 - `ui-components` — contract — ui
 - `write-boundary` — contract — validation
 - `direction` — knowledge — knowledge

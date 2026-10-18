@@ -1,37 +1,7 @@
 {
   "payloads": {
-    "react": ["react"]
-  },
-  "compatibilitySkillAliases": {
-    "react": {
-      "react-structure": {
-        "replacedBy": "react:structure",
-        "removeAfter": "2027-03-31"
-      },
-      "client-state": {
-        "replacedBy": "react:state-client",
-        "removeAfter": "2027-03-31"
-      },
-      "server-state": {
-        "replacedBy": "react:state-server",
-        "removeAfter": "2027-03-31"
-      },
-      "contract-naming": {
-        "replacedBy": "react:naming-contracts",
-        "removeAfter": "2027-03-31"
-      },
-      "typescript-style": {
-        "replacedBy": "react:style",
-        "removeAfter": "2027-03-31"
-      },
-      "frontend-testing": {
-        "replacedBy": "react:testing-frontend",
-        "removeAfter": "2027-03-31"
-      },
-      "stack-defaults": {
-        "replacedBy": "react:libraries-selected",
-        "removeAfter": "2027-03-31"
-      }
-    }
+    "react": [
+      "react"
+    ]
   }
 }
