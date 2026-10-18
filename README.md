@@ -1,10 +1,11 @@
 # react
 
-Generic React and TypeScript guidance for Claude Code and Codex, published as `react@react-agents`.
+Generic React and TypeScript guidance for Claude Code and Codex, selected as `react@tj-agents`.
 
-Use `react:structure` for React code organization. The previously published `react:react-structure` remains
-as a forwarding compatibility skill through 2027-03-31. The canonical repository is
-[`tj-agents/react`](https://github.com/tj-agents/react); the marketplace ID remains `react-agents`.
+Use `react:structure` for React code organization. The canonical repository is
+[`tj-agents/react`](https://github.com/tj-agents/react), available through the shared
+[`tj-agents` marketplace](https://github.com/tj-agents/marketplace). This repository explicitly adopts
+the mandatory personal-project policy and checks its native instructions and selection in CI.
 
 ## Skills
 
@@ -17,9 +18,7 @@ as a forwarding compatibility skill through 2027-03-31. The canonical repository
   `react:http-layer`, `react:libraries-selected`, `react:routing`, `react:state-client`,
   `react:state-server`, `react:testing-frontend`, `react:tiered-shared-code`, `react:ui-components`,
   `react:write-boundary`.
-- Compatibility aliases (removed after 2027-03-31): `react:react-structure`, `react:client-state`,
-  `react:server-state`, `react:contract-naming`, `react:typescript-style`, `react:frontend-testing`,
-  `react:stack-defaults`.
+
 
 ## Applicability
 
