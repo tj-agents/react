@@ -5,6 +5,7 @@
 - `date-formatting` — contract — dates
 - `domain-design` — contract — core
 - `errors` — contract — core
+- `explanation` — contract — core
 - `http-layer` — contract — http
 - `libraries` — contract — core
 - `libraries-selected` — contract — selected-stack
