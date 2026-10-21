@@ -9,6 +9,7 @@ Generated from `.agents/<plugin>/<kind>/<family>/<member>/SKILL.md`; a skill's n
 - `date-formatting` — contract — dates — `.agents/react/contract/date-formatting/SKILL.md`
 - `domain-design` — contract — core — `.agents/react/contract/domain-design/SKILL.md`
 - `errors` — contract — core — `.agents/react/contract/errors/SKILL.md`
+- `explanation` — contract — core — `.agents/react/contract/explanation/SKILL.md`
 - `http-layer` — contract — http — `.agents/react/contract/http-layer/SKILL.md`
 - `libraries` — contract — core — `.agents/react/contract/libraries/SKILL.md`
 - `libraries-selected` — contract — selected-stack — `.agents/react/contract/libraries/selected/SKILL.md`
