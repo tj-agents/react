@@ -16,6 +16,7 @@
       "build",
       "domain-design",
       "errors",
+      "explanation",
       "libraries",
       "naming-contracts",
       "structure",
@@ -143,6 +144,21 @@
         "react"
       ],
       "provenance": [
+        "house"
+      ]
+    },
+    {
+      "name": "explanation",
+      "kind": "contract",
+      "profile": "core",
+      "applicability": [
+        "TypeScript and TSX code"
+      ],
+      "requires": [
+        "typescript"
+      ],
+      "provenance": [
+        "language",
         "house"
       ]
     },

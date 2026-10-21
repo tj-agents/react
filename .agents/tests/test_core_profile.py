@@ -34,7 +34,7 @@ class ReactCoreProfileTests(unittest.TestCase):
         self.assertEqual(
             {
                 "naming-contracts", "structure", "style",
-                "domain-design", "errors", "build", "libraries", "testing",
+                "domain-design", "errors", "build", "libraries", "testing", "explanation",
             },
             core_names,
         )
