@@ -1,5 +1,4 @@
 {
-  "name": "react-agents",
   "description": "Generic TypeScript and React engineering standards, distributed as versioned, load-on-demand skills routing to a browsable standards tree. Names no product, so it applies to every React/TS repo.",
   "owner": {
     "name": "Tommy Seery"
