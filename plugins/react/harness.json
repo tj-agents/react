@@ -1,22 +1,18 @@
 {
   "schema_version": 1,
-  "plugin": "react-agents/react",
+  "plugin": "tj-agents/react",
   "source_roots": [
     ".agents/react"
   ],
   "requires": {
     "marketplaces": [
       {
-        "id": "react-agents",
-        "repository": "tj-agents/react"
-      },
-      {
         "id": "tj-agents",
         "repository": "tj-agents/marketplace"
       }
     ],
     "plugins": [
-      "react-agents/react",
+      "tj-agents/react",
       "tj-agents/base",
       "tj-agents/engineering",
       "tj-agents/machine"
