@@ -1,47 +1,23 @@
 ---
 name: ui-components
-description: Tailwind styling and the component primitives around it — class strings merged only through a cn() helper that lets a caller's className win, visual variants expressed with cva rather than stacked ternaries, copy-in Radix/shadcn primitives treated as owned code that stays generic while features never re-implement one, a single icon set, toasts fired from the hook that owns the mutation rather than the component that rendered the button, animation kept opt-in and never load-bearing for reachability, and theme colours taken from CSS variables so the other mode is not broken silently. Use when building or restyling a component, adding a variant, editing a generated primitive, adding an icon or toast or animation library, or reviewing a class string that concatenates by hand.
+description: Component API and composition for explicitly selected Radix/shadcn primitives, owned generic UI, icons, operation toasts and optional animation. Use when building a component primitive, changing its API or composing feature UI. Tailwind class merging and visual variants belong to react:styling.
 kind: contract
 domain: react
 profile: ui
-applicability: React applications using the selected component and styling stack
-requires: tailwind, cva, radix-or-shadcn
+applicability: React applications using the selected primitive component stack
+requires: radix-or-shadcn
 provenance: ui, selected-library
 ---
 
-# UI and styling
+# UI components
 
-Owns Tailwind styling and the component-primitive layer around it — class merging, variants, and copy-in
-primitives.
+Owns component API/composition and the selected owned primitive layer, including icons, operation toasts
+and optional animation. `react:styling` owns the selected Tailwind implementation. Component selection
+does not require that styling choice; a CSS Modules project does not inherit Tailwind/cva rules.
 
-Tailwind for appearance, copy-in primitives for behaviour, one library per cross-cutting UI job. The rule
-this file exists to hold: **there is exactly one way to express a variant, one place classes merge, and one
-owner for each primitive.**
-
-## Classes merge in `cn()`, nowhere else
-
-`cn()` is clsx plus tailwind-merge, so a later utility actually beats an earlier one instead of both
-landing in the class string and the loser winning by source order.
-
-```ts
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
-```
-
-Every component that accepts a `className` passes it through `cn()` last, so a caller can always override.
-A component that concatenates class strings by hand, or that drops the caller's `className`, is a bug.
-
-## Variants are `cva`, not stacked ternaries
-
-A component with more than one visual axis (variant, size, tone) declares them once with **cva** and takes
-the generated props. Ternaries in the class string are how two axes become an unreadable product of four.
-
-```ts
-const badgeVariants = cva("inline-flex items-center rounded-md border px-2 py-0.5", {
-  variants: { variant: { default: "…", destructive: "…" } },
-  defaultVariants: { variant: "default" },
-});
+```tsx
+// A feature composes the selected generic primitive; domain behavior stays with the feature.
+<Button onClick={save} disabled={pending}>Save</Button>
 ```
 
 ## Copy-in primitives are owned code
@@ -74,9 +50,3 @@ transition first — most hover, focus and open/close states need nothing more.
 
 Never animate on every render, and never make an animation load-bearing for whether content is reachable:
 if the library fails to load, the page must still show its content.
-
-## Dark mode and tokens
-
-Colours come from CSS variables the theme defines, not from literal palette utilities scattered through
-components. A component that hard-codes a specific shade renders wrong in the other theme, and the failure
-shows up only in whichever mode the author was not using.

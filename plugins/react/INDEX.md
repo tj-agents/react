@@ -8,7 +8,6 @@
 - `explanation` — contract — core
 - `http-layer` — contract — http
 - `libraries` — contract — core
-- `libraries-selected` — contract — selected-stack
 - `naming-contracts` — contract — core
 - `routing` — contract — routing
 - `state-client` — contract — client-state
@@ -19,7 +18,8 @@
 - `testing-frontend` — contract — testing
 - `tiered-shared-code` — contract — app-tiers
 - `ui-components` — contract — ui
-- `write-boundary` — contract — validation
+- `styling` — convention — styling
+- `validation` — convention — validation
 - `direction` — knowledge — knowledge
 - `knowledge` — knowledge — knowledge
 - `learning` — knowledge — knowledge

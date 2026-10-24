@@ -40,7 +40,7 @@ class ReactCoreProfileTests(unittest.TestCase):
         )
         must_not_be_core = {
             "state-client", "data-tables", "date-formatting", "http-layer", "routing", "state-server",
-            "tiered-shared-code", "ui-components", "write-boundary", "libraries-selected", "testing-frontend",
+            "tiered-shared-code", "ui-components", "validation", "styling", "testing-frontend",
         }
         self.assertTrue(must_not_be_core.isdisjoint(core_names))
         core_requires = ", ".join(self.skills[name]["metadata"]["requires"] for name in core_names).lower()
@@ -55,9 +55,9 @@ class ReactCoreProfileTests(unittest.TestCase):
             "routing": "tanstack-router",
             "state-server": "tanstack-query",
             "tiered-shared-code": "multi-app-repository",
-            "ui-components": "tailwind",
-            "write-boundary": "zod",
-            "libraries-selected": "selected-library-stack",
+            "ui-components": "radix-or-shadcn",
+            "styling": "tailwind",
+            "validation": "zod",
             "testing-frontend": "adopted-frontend-tests",
         }
         for name, prerequisite in expected.items():
@@ -66,7 +66,7 @@ class ReactCoreProfileTests(unittest.TestCase):
     def test_retired_skill_names_are_absent(self) -> None:
         retired = {
             "react-structure", "client-state", "server-state", "contract-naming",
-            "typescript-style", "frontend-testing", "stack-defaults",
+            "typescript-style", "frontend-testing", "stack-defaults", "write-boundary", "libraries-selected",
         }
         self.assertTrue(retired.isdisjoint(self.skills))
         self.assertFalse(self.payloads.get("compatibilitySkillAliases"))
