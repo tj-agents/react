@@ -101,7 +101,7 @@ type, not a new type wrapping it.
 
 **Litmus:** *does this new type exist so components can avoid touching the read type? → delete it and
 touch the read type.* The write direction is the opposite and deliberately so: a request is a genuinely
-different shape, and `react:write-boundary` owns where that reshape happens.
+different shape, and `react:validation` owns where that reshape happens.
 
 ## Contract types live in the feature's `types.ts`
 
