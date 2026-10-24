@@ -1,7 +1,7 @@
 ---
-name: write-boundary
+name: validation
 description: The client write boundary — every user-editable form validates its controlled-input buffer against a zod schema at submit and maps the *parsed* result, never the raw buffer, to the request type, so the parse narrows the type (removing the `!` bang and `?? fallback` that are the missing validation) and yields per-field messages rendered inline plus a real `isValid` submit gate; the schema lives in the feature's `schemas/` folder and is tied to the request with `z.infer` so drift is a compile error, and client validation is a UX affordance rather than a trust boundary. where the request shape is built as the argument to safeParse rather than mapped afterwards, so conditional drops and empty-string normalization happen before validation and the thing proven correct is the thing sent, with that reshape living in the feature's facade hook not the component; use when building or reviewing a form, mapping a buffer to a request, seeing a non-null assertion on form data, or reporting a validation message.
-kind: contract
+kind: convention
 domain: react
 profile: validation
 applicability: React forms that accept user-editable input
@@ -9,7 +9,7 @@ requires: zod, user-editable-forms
 provenance: validation, selected-library
 ---
 
-# The write boundary
+# Validation
 
 Owns the client write boundary — form validation against zod, the parsed-to-request mapping, and inline
 validation messages.
@@ -68,8 +68,14 @@ argument too — they change what is valid, so they must happen before validatio
 The reshape lives in the feature's facade hook beside the `safeParse` call, not in the component. A
 component that assembles a nested request object is holding contract knowledge it should not have.
 
-**Client validation is a UX affordance, not a trust boundary.** The server re-validates every field
-regardless. Never drop a server check because the client has one.
+**Client validation is a UX affordance, not a trust boundary.** The authoritative receiver revalidates
+every field, whether it is an HTTP server or a native command such as a Tauri handler. Never remove
+receiver validation because the React client already parsed the input.
+
+Zod is the explicitly selected implementation for this profile; React itself does not require it.
+Route-search and environment inputs also need their selected boundary parser before use; form-specific
+submit, request-shaping and inline-error rules below apply to editable forms. Library choice belongs
+to `react:libraries`.
 
 **The anti-patterns:**
 

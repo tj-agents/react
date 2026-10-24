@@ -56,6 +56,15 @@ Keys are arrays ordered most-generic to most-specific with the resource name fir
 `["shipments", "order", orderId]` — so invalidation works by prefix. Centralize a feature's
 keys in one exported factory object, so a key and its invalidations cannot drift apart across files.
 
+```ts
+const shipmentKeys = {
+  all: ["shipments"] as const,
+  order: (orderId: string) => [...shipmentKeys.all, "order", orderId] as const,
+};
+// The same key factory supplies reads and invalidation.
+queryClient.invalidateQueries({ queryKey: shipmentKeys.order(orderId) });
+```
+
 ## Mutation variables versus form state
 
 - **The live controlled-input buffer is local `useState` in the component.** It is *not* an `XRequest`, and
@@ -65,6 +74,6 @@ keys in one exported factory object, so a key and its invalidations cannot drift
   takes only the per-submit variables. Don't thread a fixed id through the mutation call if the hook already
   closed over it.
 
-The parse that turns a buffer into a request is the `react:write-boundary` skill's subject.
+The parse that turns a buffer into a request is the `react:validation` skill's subject.
 
 **Litmus:** *changes per submit → a mutation variable. Fixed for the hook's life → bound inside the hook.*

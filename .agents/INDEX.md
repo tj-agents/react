@@ -12,7 +12,6 @@ Generated from `.agents/<plugin>/<kind>/<family>/<member>/SKILL.md`; a skill's n
 - `explanation` — contract — core — `.agents/react/contract/explanation/SKILL.md`
 - `http-layer` — contract — http — `.agents/react/contract/http-layer/SKILL.md`
 - `libraries` — contract — core — `.agents/react/contract/libraries/SKILL.md`
-- `libraries-selected` — contract — selected-stack — `.agents/react/contract/libraries/selected/SKILL.md`
 - `naming-contracts` — contract — core — `.agents/react/contract/naming/contracts/SKILL.md`
 - `routing` — contract — routing — `.agents/react/contract/routing/SKILL.md`
 - `state-client` — contract — client-state — `.agents/react/contract/state/client/SKILL.md`
@@ -23,7 +22,8 @@ Generated from `.agents/<plugin>/<kind>/<family>/<member>/SKILL.md`; a skill's n
 - `testing-frontend` — contract — testing — `.agents/react/contract/testing/frontend/SKILL.md`
 - `tiered-shared-code` — contract — app-tiers — `.agents/react/contract/tiered-shared-code/SKILL.md`
 - `ui-components` — contract — ui — `.agents/react/contract/ui-components/SKILL.md`
-- `write-boundary` — contract — validation — `.agents/react/contract/write-boundary/SKILL.md`
+- `styling` — convention — styling — `.agents/react/convention/styling/SKILL.md`
+- `validation` — convention — validation — `.agents/react/convention/validation/SKILL.md`
 - `direction` — knowledge — knowledge — `.agents/react/knowledge/direction/SKILL.md`
 - `knowledge` — knowledge — knowledge — `.agents/react/knowledge/knowledge/SKILL.md`
 - `learning` — knowledge — knowledge — `.agents/react/knowledge/learning/SKILL.md`

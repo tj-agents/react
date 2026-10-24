@@ -43,11 +43,11 @@
     "scaffold": [
       "scaffold"
     ],
-    "selected-stack": [
-      "libraries-selected"
-    ],
     "server-state": [
       "state-server"
+    ],
+    "styling": [
+      "styling"
     ],
     "testing": [
       "testing-frontend"
@@ -56,7 +56,7 @@
       "ui-components"
     ],
     "validation": [
-      "write-boundary"
+      "validation"
     ]
   },
   "compatibilitySkillAliases": {},
@@ -211,27 +211,12 @@
       "kind": "contract",
       "profile": "core",
       "applicability": [
-        "React projects"
+        "React projects; concrete defaults only for explicitly adopted choices"
       ],
       "requires": [
         "react"
       ],
       "provenance": [
-        "house"
-      ]
-    },
-    {
-      "name": "libraries-selected",
-      "kind": "contract",
-      "profile": "selected-stack",
-      "applicability": [
-        "Repositories choosing Tommy's complete React library stack"
-      ],
-      "requires": [
-        "selected-library-stack"
-      ],
-      "provenance": [
-        "selected-stack",
         "house"
       ]
     },
@@ -342,6 +327,24 @@
       ]
     },
     {
+      "name": "styling",
+      "kind": "convention",
+      "profile": "styling",
+      "applicability": [
+        "React projects selecting Tailwind utility styling"
+      ],
+      "requires": [
+        "tailwind",
+        "cva",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "provenance": [
+        "ui",
+        "selected-library"
+      ]
+    },
+    {
       "name": "testing",
       "kind": "contract",
       "profile": "core",
@@ -390,11 +393,9 @@
       "kind": "contract",
       "profile": "ui",
       "applicability": [
-        "React applications using the selected component and styling stack"
+        "React applications using the selected primitive component stack"
       ],
       "requires": [
-        "tailwind",
-        "cva",
         "radix-or-shadcn"
       ],
       "provenance": [
@@ -403,8 +404,8 @@
       ]
     },
     {
-      "name": "write-boundary",
-      "kind": "contract",
+      "name": "validation",
+      "kind": "convention",
       "profile": "validation",
       "applicability": [
         "React forms that accept user-editable input"
