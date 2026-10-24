@@ -1,10 +1,10 @@
 ---
 name: libraries
-description: When a TypeScript/React app takes a new dependency — one library per job, replacing rather than adding a second answer to a question an existing library already solves. Use when adding a dependency or reviewing a PR that introduces a library overlapping one already in the stack. See react:libraries-selected for Tommy's concrete, selected React library stack.
+description: Own React dependency policy and scoped library choices. Use when adding, replacing or selecting a dependency, choosing a state or validation library, or reviewing overlapping libraries. Optional defaults apply only when explicitly adopted; concern skills own detailed use.
 kind: contract
 domain: react
 profile: core
-applicability: React projects
+applicability: React projects; concrete defaults only for explicitly adopted choices
 requires: react
 provenance: house
 ---

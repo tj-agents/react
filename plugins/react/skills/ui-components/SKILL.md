@@ -1,15 +1,15 @@
 ---
 name: ui-components
-description: Tailwind styling and the component primitives around it — class strings merged only through a cn() helper that lets a caller's className win, visual variants expressed with cva rather than stacked ternaries, copy-in Radix/shadcn primitives treated as owned code that stays generic while features never re-implement one, a single icon set, toasts fired from the hook that owns the mutation rather than the component that rendered the button, animation kept opt-in and never load-bearing for reachability, and theme colours taken from CSS variables so the other mode is not broken silently. Use when building or restyling a component, adding a variant, editing a generated primitive, adding an icon or toast or animation library, or reviewing a class string that concatenates by hand.
+description: Component API and composition for explicitly selected Radix/shadcn primitives, owned generic UI, icons, operation toasts and optional animation. Use when building a component primitive, changing its API or composing feature UI. Tailwind class merging and visual variants belong to react:styling.
 kind: contract
 domain: react
 profile: ui
-applicability: React applications using the selected component and styling stack
-requires: tailwind, cva, radix-or-shadcn
+applicability: React applications using the selected primitive component stack
+requires: radix-or-shadcn
 provenance: ui, selected-library
 ---
 
-# UI and styling
+# UI components
 
 Read and follow the [canonical definition](../../.agents/react/contract/ui-components/SKILL.md) in full.
 This discovery entry is generated; edit the referenced `.agents/` definition.

@@ -15,9 +15,9 @@ the mandatory personal-project policy and checks its native instructions and sel
 - Knowledge: `react:direction`, `react:knowledge`, `react:learning`.
 - Utilities: `react:scaffold`.
 - Other contracts, each gated on its own library or shape: `react:data-tables`, `react:date-formatting`,
-  `react:http-layer`, `react:libraries-selected`, `react:routing`, `react:state-client`,
+  `react:http-layer`, `react:routing`, `react:state-client`,
   `react:state-server`, `react:testing-frontend`, `react:tiered-shared-code`, `react:ui-components`,
-  `react:write-boundary`.
+  `react:validation`, `react:styling`.
 
 
 ## Applicability
@@ -25,7 +25,7 @@ the mandatory personal-project policy and checks its native instructions and sel
 The `core` profile contains only `react:structure`, `react:style`, `react:naming-contracts`,
 `react:domain-design`, `react:errors`, `react:build`, `react:libraries` and `react:testing` — each one
 stack-free and usable without TanStack libraries, Zustand, Tailwind, axios, zod, dayjs, or a multi-app
-repository. `react:libraries-selected` (Tommy's concrete, selected React library stack) and
+repository. The concrete choices inside `react:libraries` apply only when explicitly adopted.
 `react:testing-frontend` (an adopted frontend test suite's architecture) are independent profiles, alongside
 TanStack Query, Router, and Table; Zustand; Tailwind and component primitives; axios; zod; dayjs; and
 multi-app sharing. Installing the plugin makes every capability discoverable; a repository selects only the
