@@ -21,34 +21,5 @@
         "pattern": "\"(react|react-dom|typescript)\"\\s*:"
       }
     ]
-  },
-  "routes": [
-    {
-      "path": "(^|/)package\\.json$",
-      "skills": [
-        "react:libraries"
-      ]
-    },
-    {
-      "path": "\\.[jt]sx?$",
-      "content_requires": "\\b(safeParse|zod)\\b",
-      "skills": [
-        "react:validation"
-      ]
-    },
-    {
-      "path": "\\.[jt]sx?$",
-      "content_requires": "\\b(cva|tailwind-merge)\\b",
-      "skills": [
-        "react:styling"
-      ]
-    },
-    {
-      "path": "\\.[jt]sx?$",
-      "content_requires": "@radix-ui/|@/components/ui/",
-      "skills": [
-        "react:ui-components"
-      ]
-    }
-  ]
+  }
 }
