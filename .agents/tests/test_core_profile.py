@@ -15,7 +15,13 @@ class ReactCoreProfileTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         cls.config = sync_generated.load_config(ROOT)
-        cls.plugins = sync_generated.discover(ROOT, cls.config["namespace"])
+        cls.plugins = sync_generated.discover(
+            ROOT,
+            cls.config["namespace"],
+            sync_generated.mapped_resource_directories(
+                sync_generated.load(ROOT / ".agents/plugins/payloads.json")
+            ),
+        )
         cls.skills = cls.plugins["react"]
         cls.payloads = json.loads((ROOT / ".agents/plugins/payloads.json").read_text(encoding="utf-8"))
 
