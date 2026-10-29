@@ -1,24 +1,29 @@
 {
-  "schema_version": 1,
   "tier": "react",
   "stack": "TypeScript/React",
   "applies": "stack-present",
-  "owner_repository": [
-    "tj-agents/react"
-  ],
   "detect": {
-    "files": [
-      "tsconfig.json"
-    ],
-    "globs": [
-      "*.tsx",
-      "*.ts",
-      "*.jsx"
-    ],
-    "content": [
+    "any": [
       {
-        "glob": "package.json",
-        "pattern": "\"(react|react-dom|typescript)\"\\s*:"
+        "file": "tsconfig.json"
+      },
+      {
+        "glob": "*.tsx"
+      },
+      {
+        "glob": "*.ts"
+      },
+      {
+        "glob": "*.jsx"
+      },
+      {
+        "content": {
+          "glob": "package.json",
+          "pattern": "\"(react|react-dom|typescript)\"\\s*:"
+        }
+      },
+      {
+        "remote": "^tj\\-agents/react$"
       }
     ]
   }
