@@ -33,7 +33,6 @@
     ],
     "knowledge": [
       "direction",
-      "knowledge",
       "learning"
     ],
     "routing": [
@@ -62,7 +61,7 @@
   "skills": [
     {
       "name": "build",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "core",
       "applicability": [
         "React projects"
@@ -76,7 +75,7 @@
     },
     {
       "name": "data-tables",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "data-tables",
       "applicability": [
         "React features rendering interactive data tables"
@@ -91,7 +90,7 @@
     },
     {
       "name": "date-formatting",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "dates",
       "applicability": [
         "TypeScript applications formatting or comparing dates"
@@ -106,7 +105,7 @@
     },
     {
       "name": "direction",
-      "kind": "knowledge",
+      "kind": "reference",
       "profile": "knowledge",
       "applicability": [
         "React learning"
@@ -120,7 +119,7 @@
     },
     {
       "name": "domain-design",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "core",
       "applicability": [
         "React projects"
@@ -134,7 +133,7 @@
     },
     {
       "name": "errors",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "core",
       "applicability": [
         "React projects"
@@ -148,7 +147,7 @@
     },
     {
       "name": "explanation",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "core",
       "applicability": [
         "TypeScript and TSX code"
@@ -163,7 +162,7 @@
     },
     {
       "name": "http-layer",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "http",
       "applicability": [
         "React clients using the selected HTTP and server-state stack"
@@ -178,22 +177,8 @@
       ]
     },
     {
-      "name": "knowledge",
-      "kind": "knowledge",
-      "profile": "knowledge",
-      "applicability": [
-        "React learning"
-      ],
-      "requires": [
-        "react"
-      ],
-      "provenance": [
-        "house"
-      ]
-    },
-    {
       "name": "learning",
-      "kind": "knowledge",
+      "kind": "learning",
       "profile": "knowledge",
       "applicability": [
         "React projects and learning"
@@ -207,7 +192,7 @@
     },
     {
       "name": "libraries",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "core",
       "applicability": [
         "React projects; concrete defaults only for explicitly adopted choices"
@@ -221,7 +206,7 @@
     },
     {
       "name": "naming-contracts",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "core",
       "applicability": [
         "TypeScript clients with hand-written HTTP contracts"
@@ -237,7 +222,7 @@
     },
     {
       "name": "routing",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "routing",
       "applicability": [
         "React applications using file-based TanStack Router"
@@ -252,7 +237,7 @@
     },
     {
       "name": "scaffold",
-      "kind": "utility",
+      "kind": "operation",
       "profile": "scaffold",
       "applicability": [
         "new React projects"
@@ -266,7 +251,7 @@
     },
     {
       "name": "state-client",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "client-state",
       "applicability": [
         "React features with shared client state"
@@ -281,7 +266,7 @@
     },
     {
       "name": "state-server",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "server-state",
       "applicability": [
         "React applications using TanStack Query for server state"
@@ -296,7 +281,7 @@
     },
     {
       "name": "structure",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "core",
       "applicability": [
         "React applications"
@@ -312,7 +297,7 @@
     },
     {
       "name": "style",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "core",
       "applicability": [
         "TypeScript code"
@@ -327,7 +312,7 @@
     },
     {
       "name": "styling",
-      "kind": "convention",
+      "kind": "standard",
       "profile": "styling",
       "applicability": [
         "React projects selecting Tailwind utility styling"
@@ -345,7 +330,7 @@
     },
     {
       "name": "testing",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "core",
       "applicability": [
         "React projects"
@@ -359,7 +344,7 @@
     },
     {
       "name": "testing-frontend",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "testing",
       "applicability": [
         "React repositories with an explicitly adopted frontend test suite"
@@ -374,7 +359,7 @@
     },
     {
       "name": "tiered-shared-code",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "app-tiers",
       "applicability": [
         "Repositories that share code across multiple applications"
@@ -389,7 +374,7 @@
     },
     {
       "name": "ui-components",
-      "kind": "contract",
+      "kind": "standard",
       "profile": "ui",
       "applicability": [
         "React applications using the selected primitive component stack"
@@ -404,7 +389,7 @@
     },
     {
       "name": "validation",
-      "kind": "convention",
+      "kind": "standard",
       "profile": "validation",
       "applicability": [
         "React forms that accept user-editable input"

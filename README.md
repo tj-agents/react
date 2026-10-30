@@ -9,12 +9,12 @@ the mandatory personal-project policy and checks its native instructions and sel
 
 ## Skills
 
-- Core contracts, stack-free: `react:structure`, `react:style`, `react:naming-contracts`,
+- Core standards, stack-free: `react:structure`, `react:style`, `react:naming-contracts`,
   `react:libraries`, `react:testing`.
-- Core contracts, empty until a decision is recorded: `react:build`, `react:domain-design`, `react:errors`.
-- Knowledge: `react:direction`, `react:knowledge`, `react:learning`.
-- Utilities: `react:scaffold`.
-- Other contracts, each gated on its own library or shape: `react:data-tables`, `react:date-formatting`,
+- Core standards, empty until a decision is recorded: `react:build`, `react:domain-design`, `react:errors`.
+- Learning: `react:learning`; context: `react:direction`. Learner records live in `.agents/react/learning/`.
+- Operation: `react:scaffold`.
+- Other standards, each gated on its own library or shape: `react:data-tables`, `react:date-formatting`,
   `react:http-layer`, `react:routing`, `react:state-client`,
   `react:state-server`, `react:testing-frontend`, `react:tiered-shared-code`, `react:ui-components`,
   `react:validation`, `react:styling`.

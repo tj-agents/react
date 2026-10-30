@@ -1,15 +1,16 @@
 ---
 name: direction
-description: Where Tommy is headed with React — the goal, the skill tree being worked through, and the references every explanation and convention cites. Use when choosing or sequencing what to learn next, or when sourcing a React explanation or a proposed convention.
-kind: knowledge
-domain: react
-profile: knowledge
-applicability: React learning
-requires: react
-provenance: house
+description: React learning orientation and agreed references. Use when locating Tommy's recorded goal, skill-tree status or proven knowledge, or sourcing a React explanation or proposed standard; react:learning owns teaching, progress and agreement.
+metadata:
+  tj-agents-kind: reference
+  tj-agents-domain: react
+  tj-agents-profile: knowledge
+  tj-agents-applicability: React learning
+  tj-agents-requires: react
+  tj-agents-provenance: house
 ---
 
-# Where Tommy is headed with React
+# React learning orientation
 
-Read and follow the [canonical definition](../../.agents/react/knowledge/direction/SKILL.md) in full.
+Read and follow the [canonical definition](../../.agents/react/skills/direction/SKILL.md) in full.
 This discovery entry is generated; edit the referenced `.agents/` definition.

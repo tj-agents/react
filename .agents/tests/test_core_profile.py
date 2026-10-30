@@ -25,14 +25,14 @@ class ReactCoreProfileTests(unittest.TestCase):
         cls.skills = cls.plugins["react"]
         cls.payloads = json.loads((ROOT / ".agents/plugins/payloads.json").read_text(encoding="utf-8"))
 
-    def test_required_stack_contracts_are_core_and_present(self) -> None:
+    def test_required_stack_standards_are_core_and_present(self) -> None:
         required = {"style", "structure", "domain-design", "errors", "testing", "build", "libraries"}
         self.assertTrue(required.issubset(self.skills))
         for name in required:
-            self.assertEqual("contract", self.skills[name]["kind"])
+            self.assertEqual("standard", self.skills[name]["kind"])
             self.assertEqual("core", self.skills[name]["metadata"]["profile"])
 
-    def test_core_is_exactly_the_stack_free_contracts(self) -> None:
+    def test_core_is_exactly_the_stack_free_standards(self) -> None:
         core_names = {
             name for name, skill in self.skills.items()
             if skill["metadata"]["profile"] == "core"
@@ -71,6 +71,7 @@ class ReactCoreProfileTests(unittest.TestCase):
 
     def test_retired_skill_names_are_absent(self) -> None:
         retired = {
+            "knowledge",
             "react-structure", "client-state", "server-state", "contract-naming",
             "typescript-style", "frontend-testing", "stack-defaults", "write-boundary", "libraries-selected",
         }
