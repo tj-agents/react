@@ -3,5 +3,12 @@
     "react": [
       "react"
     ]
-  }
+  },
+  "resources": [
+    {
+      "plugin": "react",
+      "source": ".agents/react/learning",
+      "destination": ".agents/react/learning"
+    }
+  ]
 }
