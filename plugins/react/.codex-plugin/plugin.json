@@ -21,5 +21,6 @@
     "category": "Productivity",
     "capabilities": [],
     "defaultPrompt": "Apply the relevant generic React or TypeScript standard to this task."
-  }
+  },
+  "version": "9f20e08baac8"
 }
