@@ -22,9 +22,11 @@ never travels on the wire, which is why naming is the client's own decision (see
 ## Object shapes are `interface`; everything else is `type`
 
 - `export interface` for every object or record shape.
+  Enforced by `@typescript-eslint/consistent-type-definitions` in `react:scaffold`.
 - `type` for string-literal unions, discriminated-union umbrellas, template-literal types, and
   utility-derived types (`type WritableOrder = Omit<Order, "id">`).
 - Extend with `interface X extends Y`, not an intersection.
+  Enforced for intersection aliases by ESLint `no-restricted-syntax` in `react:scaffold`.
 
 The two roles then stay visually distinct at a glance.
 
@@ -33,6 +35,8 @@ The two roles then stay visually distinct at a glance.
 Fields are **camelCase** and match the JSON key-for-key. A modern server framework's web defaults
 serialize camelCase, so the wire is camelCase out of the box and **no client-side case conversion should
 exist**.
+Type-field casing is enforced by `@typescript-eslint/naming-convention` in `react:scaffold`; `$type`
+remains a permitted wire discriminator.
 
 - **A PascalCase key in a JSON body is a server bug** — something serialized outside the framework's
   configured pipeline, preserving the server language's casing. Fix it there; never add a client-side key
@@ -72,3 +76,6 @@ one table, not a switch repeated across components — see the `react:structure`
 
 **Pick exactly one discriminant.** A union carrying two candidate keys, with guards narrowing on one while
 the wire polymorphism uses the other, is the violation.
+
+Exhaustive union switches are enforced by `@typescript-eslint/switch-exhaustiveness-check` in
+`react:scaffold`; `never` assignments are enforced by TypeScript.

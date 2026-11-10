@@ -1,6 +1,6 @@
 ---
 name: scaffold
-description: Create a new React project in the File structure `react:structure` records. Use when starting a React project; it creates nothing until that File structure is agreed.
+description: Configure a new React project's TypeScript and ESLint checks, or create its application tree once react:structure records an agreed File structure. Use when starting a React project or adding the scaffold's mechanical standards checks.
 kind: utility
 domain: react
 profile: scaffold
