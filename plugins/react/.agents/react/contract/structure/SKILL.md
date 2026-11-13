@@ -1,6 +1,6 @@
 ---
 name: structure
-description: How React code is organized — feature slices with explicit owners, hooks for reusable stateful orchestration and external integration, components that handle immediate UI events and render, Effects reserved for synchronization outside React, derived values computed during render, and closed-key behavior dispatched through one exhaustive table. Use when adding a feature folder, deciding whether logic belongs in a component or hook, reaching for useEffect, or writing a second branch on the same discriminator.
+description: How React code is organized — feature slices with explicit owners (a feature component using none of its slice's types or api is misplaced generic UI), hooks for reusable stateful orchestration and external integration, components that handle immediate UI events and render, Effects reserved for synchronization outside React, derived values computed during render, and closed-key behavior dispatched through one exhaustive table. Use when adding a feature folder, deciding whether logic belongs in a component or hook, reaching for useEffect, or writing a second branch on the same discriminator.
 kind: contract
 domain: react
 profile: core
@@ -22,6 +22,10 @@ explicit owners.
 
 The rule is about **cohesion, not file count.** More files are fine; the defect is the same state or
 derivation copied across disjoint owners.
+
+A component in `features/<feature>/components/` that names no type from `../types` and calls no api in
+`../api` is not part of the slice; it is generic UI in the wrong place and moves to the repository's shared
+generic component folder (see the `react:ui-components` skill when applicable).
 
 ## Hooks orchestrate; components render
 

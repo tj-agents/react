@@ -1,6 +1,6 @@
 ---
 name: ui-components
-description: Component API and composition for explicitly selected Radix/shadcn primitives, owned generic UI, icons, operation toasts and optional animation. Use when building a component primitive, changing its API or composing feature UI. Tailwind class merging and visual variants belong to react:styling.
+description: Component API and composition for explicitly selected Radix/shadcn primitives, owned generic UI, icons, operation toasts and optional animation. Use when building a component primitive, writing a small presentational component with no domain data, changing its API or composing feature UI. Tailwind class merging and visual variants belong to react:styling.
 kind: contract
 domain: react
 profile: ui
@@ -25,11 +25,19 @@ does not require that styling choice; a CSS Modules project does not inherit Tai
 Primitives generated into `components/ui/` (the shadcn model over Radix) are **your files**. Edit them in
 place when the design needs it; they are not vendored dependencies to leave untouched and wrap.
 
-Two rules keep that from turning into drift:
+Three rules keep that from turning into drift:
 
 - **A primitive is generic.** No feature vocabulary, no domain type, no data fetching. The moment a
   primitive imports from a feature, it stopped being a primitive.
 - **A feature never re-implements one.** If the button needs a new tone, the button gains a variant.
+- **A new generic component starts in `components/ui/`, not in the feature that first needed it.** A
+  spinner, an empty state or a confirm shell is written once there, where the next feature finds it instead
+  of copying it.
+
+```text
+features/orders/components/OrderSummary.tsx   uses ../types and ../api -> stays in the feature
+features/orders/components/EmptyState.tsx     uses neither            -> components/ui/EmptyState.tsx
+```
 
 Do not add a second component library alongside the primitives already in the tree, and do not add a
 CSS-in-JS runtime — the point of utilities plus owned primitives is that there is one place to look.
