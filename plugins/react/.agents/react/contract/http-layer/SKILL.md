@@ -1,6 +1,6 @@
 ---
 name: http-layer
-description: The client's HTTP layer — one `xApi` object per resource under the feature's `api/` folder, the response shape typed on the request generic, one HTTP-client instance per backend service created bare in the core package and enhanced with base URL, auth and tenant headers only in the app tree, and API errors resolved once at the query client's global handler with typed `meta` opt-outs, a shared retry policy, and the single legitimate exception of a route guard branching on status through the shared error seam rather than importing the HTTP library's own error helpers. Use when adding an api module or endpoint call, wiring auth or headers onto a client, writing a `try/catch` or `onError` around an API call, or adding a client for another backend.
+description: The client's HTTP layer — one `xApi` object per resource under the feature's `api/` folder with its route prefix declared once as a `const BASE`, the response shape typed on the request generic, one HTTP-client instance per backend service created bare in the core package and enhanced with base URL, auth and tenant headers only in the app tree, and API errors resolved once at the query client's global handler with typed `meta` opt-outs, a shared retry policy, and the single legitimate exception of a route guard branching on status through the shared error seam rather than importing the HTTP library's own error helpers. Use when adding an api module or endpoint call, wiring auth or headers onto a client, writing a `try/catch` or `onError` around an API call, or adding a client for another backend.
 kind: contract
 domain: react
 profile: http
@@ -22,10 +22,15 @@ module kept out of components is the standard data-layer split, and it mirrors t
 outbound call gets a typed contract rather than hand-rolled request plumbing.
 
 ```ts
+const BASE = "/order";
+
 const orderApi = {
   checkout: async (orderId: number): Promise<Checkout> => {
-    const { data } = await api.post<Checkout>(`/order/${orderId}/checkout`);
+    const { data } = await api.post<Checkout>(`${BASE}/${orderId}/checkout`);
     return data;
+  },
+  cancel: async (orderId: number): Promise<void> => {
+    await api.post(`${BASE}/${orderId}/cancel`);
   },
 };
 export default orderApi;
@@ -37,6 +42,9 @@ export default orderApi;
   `{ responseType: "arraybuffer" }` and wrap the result in a `Blob`.
 - A package-local api file that only re-exposes a shared one is a **pure re-export**, never a copy.
 - Never hand-roll ad-hoc fetching where the api object expresses the call.
+- **The resource's route prefix is one `const BASE` at the top of the file**, never a literal repeated in
+  every method, so a route rename is a one-line edit. A module that genuinely calls more than one resource
+  declares one constant per prefix (`INVITATION_BASE`) rather than reusing `BASE` for a second thing.
 
 ## One instance per backend service: bare in core, enhanced in the app tree
 
