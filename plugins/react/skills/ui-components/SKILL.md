@@ -1,6 +1,6 @@
 ---
 name: ui-components
-description: Component API and composition for explicitly selected Radix/shadcn primitives, owned generic UI, icons, operation toasts and optional animation. Use when building a component primitive, changing its API or composing feature UI. Tailwind class merging and visual variants belong to react:styling.
+description: Component API and composition for explicitly selected Radix/shadcn primitives, owned generic UI, icons, operation toasts and optional animation. Use when building a component primitive, writing a small presentational component with no domain data, changing its API or composing feature UI. Tailwind class merging and visual variants belong to react:styling.
 kind: contract
 domain: react
 profile: ui

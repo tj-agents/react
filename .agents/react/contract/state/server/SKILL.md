@@ -1,6 +1,6 @@
 ---
 name: state-server
-description: Server state belongs to the query library — every read is a query and every write a mutation, never a `useEffect` plus `useState` that hand-rolls caching, dedup, retries and error routing (including for a one-shot fire-on-mount action), query keys as arrays ordered generic to specific behind a per-feature factory so keys and invalidations cannot drift, and the split between a component's live input buffer and the mutation's variables, with everything constant for the hook's lifetime bound inside the hook. Use when loading or sending server data, reviewing a `useEffect` that fetches, designing query keys, wiring invalidation, or deciding what a mutation call should receive.
+description: Server state belongs to the query library — every read is a query and every write a mutation, never a `useEffect` plus `useState` that hand-rolls caching, dedup, retries and error routing (including for a one-shot fire-on-mount action), a `queryFn` that resolves to `T | null` and never `undefined`, query keys as arrays ordered generic to specific behind a per-feature factory so keys and invalidations cannot drift, and the split between a component's live input buffer and the mutation's variables, with everything constant for the hook's lifetime bound inside the hook. Use when loading or sending server data, writing a `queryFn` whose result can be empty, reviewing a `useEffect` that fetches, designing query keys, wiring invalidation, or deciding what a mutation call should receive.
 kind: contract
 domain: react
 profile: server-state
@@ -11,8 +11,8 @@ provenance: framework, selected-library
 
 # Server state
 
-Owns server state — query and mutation ownership, raw versus feature-facing hooks, query-key shape, and
-mutation variables versus form state.
+Owns server state — query and mutation ownership, raw versus feature-facing hooks, the `queryFn` result
+contract, query-key shape, and mutation variables versus form state.
 
 ## React Query owns all server state
 
@@ -49,6 +49,34 @@ would otherwise be copied into components. Non-data hooks such as `useDebounce` 
 
 **Litmus:** *does the hook return `.data`, `.isPending`, or `.mutate` from TanStack Query? Use the
 `Query`/`Mutation` suffix. Does it expose a domain-shaped API? Use the plain domain name.*
+
+## A `queryFn` never resolves to `undefined`
+
+TanStack Query v5 throws `Query data cannot be undefined` the moment a `queryFn` resolves to `undefined` —
+a runtime failure on that branch, not a lint warning. An api call awaited directly inside, or passed
+unchanged as, a `queryFn` whose result can genuinely be empty (a 204, a 404 the client treats as "not found
+yet", a `null` JSON body) resolves to `T | null`, never `T | undefined`. This is the one exception to the
+`react:style` skill's "absent values default to `undefined`" rule.
+
+```ts
+// WRONG — the undefined branch throws inside the query the first time a caller has none yet
+getMine: async (): Promise<Thing | undefined> => {
+  const { data, status } = await api.get<Thing>(BASE);
+  return status === 204 ? undefined : data;
+},
+
+// CORRECT
+getMine: async (): Promise<Thing | null> => {
+  const { data, status } = await api.get<Thing>(BASE);
+  return status === 204 ? null : data;
+},
+```
+
+A feature-facing hook built on that query may still normalize to `undefined` for its own public return
+(`query.data ?? undefined`); that runs after the promise has resolved, so it never reaches the `queryFn`.
+
+**Litmus:** *awaited directly inside, or returned unchanged as, a `queryFn`? → `T | null`. Everywhere else —
+DTOs, request bodies, ordinary optional fields — `undefined` still applies.*
 
 ## Query keys — arrays, generic to specific, one factory per feature
 
